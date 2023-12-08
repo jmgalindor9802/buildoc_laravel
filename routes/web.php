@@ -8,6 +8,6 @@ Route::get('/', function () {
    return view('index');
 });
 
-Route::get('formulario',function(){
+Route::get('app',function(){
     return view('formularioview');
 });

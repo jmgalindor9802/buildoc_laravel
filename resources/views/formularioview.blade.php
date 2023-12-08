@@ -1,3 +1,2 @@
-<x-formulario>
-
-</x-formulario>
+@extends('layouts.app')
+@section('tituloform','Crear tarea')
