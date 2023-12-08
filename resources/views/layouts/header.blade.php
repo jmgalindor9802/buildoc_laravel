@@ -10,7 +10,8 @@
         crossorigin="anonymous">
 </head>
 
-<body>
+<body class="container-fluid">
+
     <header class="Header p-3">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
