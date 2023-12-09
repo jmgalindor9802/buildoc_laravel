@@ -83,7 +83,7 @@
             </div>
             <div class="col-lg-10" style="padding-left: 5%; padding-right: 5%;">
             <br>
-            <h1 class="mb-3">@yield('tituloform')</h1>
+            <h4 class="mb-3">@yield('tituloform')</h4>
             <div>
                 @yield('content')
             </div>
