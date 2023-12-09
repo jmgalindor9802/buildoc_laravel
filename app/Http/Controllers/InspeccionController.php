@@ -11,4 +11,8 @@ class InspeccionController extends Controller
     {
         return view('gestionInspeccion&Incidente.inspeccionDashboard');
     }
+    public function programarInspeccion()
+    {
+        return view('gestionInspeccion&Incidente.programarInspeccion');
+    }
 }

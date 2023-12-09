@@ -77,7 +77,7 @@
             </div>
         </nav>
         <main class="container-fluid">
-<div class="row ">
+<div class="row flex-grow-1">
             <div class="col-lg-2" >
             @include('layouts.menu')
             </div>

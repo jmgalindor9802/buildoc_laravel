@@ -14,9 +14,13 @@ Route::get('/', function () {
 Route::get('formulario',function(){
     return view('formularioview');
 });
-Route::get('/incidente-dashboard', [IncidenteController::class, 'incidenteDashboard'])->name('incidentes.dashboard');
-Route::get('/inspeccion-dashboard', [InspeccionController::class, 'inspeccionDashboard'])->name('inspecciones.dashboard');
+
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/incidentes', [IncidenteController::class, 'index'])->name('incidentes.dashboard');
+Route::get('/incidentes/reportar-incidente', [IncidenteController::class, 'create'])->name('reportar.incidente');
+Route::post('/incidentes', [IncidenteController::class, 'store'])->name('incidentes.store');
+Route::get('/inspeccion-dashboard', [InspeccionController::class, 'inspeccionDashboard'])->name('inspecciones.dashboard');
+Route::get('/inspeccion-dashboard/programar-inspeccion', [InspeccionController::class, 'programarInspeccion'])->name('programar.inspeccion');
