@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IncidenteController;
 use App\Http\Controllers\InspeccionController;
+use App\Http\Controllers\TareaController;
 
 
 Route::get('/', function () {
@@ -25,3 +26,4 @@ Route::post('/incidentes', [IncidenteController::class, 'store'])->name('inciden
 Route::get('/inspeccion', [InspeccionController::class, 'index'])->name('inspecciones.dashboard');
 Route::get('/inspeccion/programar-inspeccion', [InspeccionController::class, 'create'])->name('programar.inspeccion');
 Route::post('/inspeccion', [IncidenteController::class, 'store'])->name('inspeccion.store');
+Route::get('/tarea', [TareaController::class, 'index'])->name('tarea.dashboard');
