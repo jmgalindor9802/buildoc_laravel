@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class UsuariosProyectos extends Model
 {
     use HasFactory;
+    // Configuracion
+    
 }

@@ -14,22 +14,39 @@ class Usuario extends Model
     protected $PrimaryKey = 'pk_id_usuario';
 
     // Relaciones
-    public function carpetas() {
+    public function carpetas()
+    {
         return $this->hasMany(GaArchivoVersion::class, 'fk_id_usuario', 'pk_id_usuario');
     }
-    public function archivos() {
+
+    public function archivos()
+    {
         return $this->hasMany(GaArchivo::class, 'fk_id_usuario');
     }
-    public function comentariosArchivos() {
+
+    public function comentariosArchivos()
+    {
         return $this->hasMany(ComentarioArchivo::class, 'fk_id_usuario');
     }
-    public function inspecciones() {
+
+    public function inspecciones()
+    {
         return $this->belongsToMany(GiiInspeccion::class, 'usuarios_gii_inspecciones', 'fk_id_usuario', 'fk_id_inspeccion');
     }
-    public function proyectos() {
+
+    public function proyectos()
+    {
         return $this->belongsToMany(GaProyecto::class, 'usuarios_proyectos', 'fk_id_usuario', 'fk_id_proyecto');
     }
-    public function tareas() {
+
+    public function tareas()
+    {
         return $this->belongsToMany(GtTarea::class, 'usuarios_gt_tareas', 'fk_id_usuario', 'fk_id_tarea');
+    }
+
+    // Agrega la relación con la tabla usuarios_proyectos
+    public function proyectosUsuarios()
+    {
+        return $this->belongsToMany(GaProyecto::class, 'usuarios_proyectos', 'fk_id_usuario', 'fk_id_proyecto');
     }
 }
