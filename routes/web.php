@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -10,9 +9,8 @@ use App\Http\Controllers\FaseController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProyectoController;
 
-
 Route::get('/', function () {
-   return view('index');
+    return view('index');
 });
 
 Route::get('formulario',function(){
