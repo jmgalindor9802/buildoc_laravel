@@ -14,4 +14,6 @@ class GiiIncidente extends Model
     public $timestamps = false;
     protected $PrimaryKey = 'pk_id_incidente';
 
+    
+
 }
