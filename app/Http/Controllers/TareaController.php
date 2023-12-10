@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Proyecto;
 use App\Models\Fase;
-use App\Models\gtTarea;
+use App\Models\Tarea;
 
 class TareaController extends Controller
 {
@@ -34,6 +34,7 @@ class TareaController extends Controller
     return view('gestionTareas.createTarea', compact('proyectos', 'fases'));
     }
 
+   
     public function getFasesByProyecto($proyectoId)
 {
     $fases = Fase::where('fk_id_proyecto', $proyectoId)->orderBy('fasNombre')->get();
@@ -50,11 +51,11 @@ class TareaController extends Controller
     {
         $tarea= new Tarea();
 
-        $tarea-> tarNombre = $request -> nombre;
-        $tarea-> tarDescripcion = $request -> descripcion;
-        $tarea-> tarPrioridad = $request -> prioridad;
-        $tarea-> tarFecha_limite = $request -> fechaLimite;
-        $tarea-> fk_id_fase = $request -> fase;
+        $tarea-> tarNombre = $request -> tarNombre;
+        $tarea-> tarDescripcion = $request -> tarDescripcion;
+        $tarea-> tarPrioridad = $request -> tarPrioridad;
+        $tarea-> tarFecha_limite = $request -> tarFechaLimite;
+        $tarea-> fk_id_fase = $request -> tarFase;
         
         $tarea-> save();
 
