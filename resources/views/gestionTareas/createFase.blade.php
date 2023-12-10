@@ -13,14 +13,14 @@
         <div class="col-12 custom-form vh-80">
             <br>
 
-                <form action="create_fase.php" method="post" class="needs-validation " style="max-height: 70vh; " novalidate>
+                <form action="{{ route('fases.store') }}" method="post" class="needs-validation " style="max-height: 70vh; " novalidate>
                 @csrf
                     <!-- INSERTAR NOMBRE FASE -->
                     <div class="row g-3">   
                         <div class="col-sm-6">
                             <label  for="Nombre_fase" class="form-label">Nombre de la
                                 fase</label>
-                            <input name="Nombre_fase" type="text" class="form-control" id="Nombre_fase" placeholder="Nombre de la fase" required>
+                            <input name="nombre" type="text" class="form-control" id="Nombre_fase" placeholder="Nombre de la fase" required>
                             <div class="invalid-feedback">
                                 Se requiere un nombre válido.
                             </div>
@@ -28,8 +28,10 @@
                         <!-- INSERTAR PROYECTO CON LISTA DESPLEGABLE -->
                         <div class="col-md-6">
                             <label for="country" class="form-label">Proyecto</label>
-                            <select name="Proyecto_fase" class="form-select" id="country" required>
+                            <select name="proyecto" class="form-select" id="country" required>
                                 <option value="">Elegir...</option>
+                                <option value="1">Proyecto 1</option>
+                                <option value="2">Proyecto 2</option>
                                 
                                 <?php
                                 /*require('../conexion.php');
@@ -61,7 +63,7 @@
                         <!-- DESCRIPCION DE LA FASE -->
                         <div class="row g-3">
                         <label  for="Descripcion_fase" class="form-label">Descripción</label>
-                        <textarea name="Descripcion_fase" class="form-control" id="Descripcion_fase" rows="4" placeholder="Descripción de la fase" required maxlength="450"></textarea>
+                        <textarea name="descripcion" class="form-control" id="Descripcion_fase" rows="4" placeholder="Descripción de la fase" required maxlength="450"></textarea>
                         <div class="invalid-feedback">
                             Se requiere una descripción válida.
                         </div>

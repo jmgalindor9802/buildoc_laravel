@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Fase;
 
 class FaseController extends Controller
 {
@@ -21,9 +22,10 @@ class FaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return view('gestionTareas.createFase');
+
     }
 
     /**
@@ -34,7 +36,16 @@ class FaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fase= new Fase();
+
+        $fase-> fasNombre = $request -> nombre;
+        $fase-> fk_id_proyecto = $request -> proyecto;
+        $fase-> fasDescripcion = $request -> descripcion;
+        $fase-> save();
+
+       return view('gestionTareas.Tareadashboard');
+       return redirect()->route('/tarea')->with('success', 'Fase creada exitosamente');
+
     }
 
     /**

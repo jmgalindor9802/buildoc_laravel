@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Fase extends Model
 {
-    use HasFactory;
+    protected $table='gt_fase';
+    public $timestamps = false;
 }

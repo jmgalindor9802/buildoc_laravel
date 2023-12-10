@@ -31,6 +31,7 @@ Route::get('/inspeccion/programar-inspeccion', [InspeccionController::class, 'cr
 Route::post('/inspeccion', [IncidenteController::class, 'store'])->name('inspeccion.store');
 Route::get('/tarea', [TareaController::class, 'index'])->name('tarea.dashboard');
 Route::get('/fase', [FaseController::class, 'index'])->name('crear.fase');
+Route::get('/fase', [FaseController::class, 'store'])->name('fase.store');
 Route::get('/tarea/creartarea', [TareaController::class, 'create'])->name('crear.tarea');
 Route::get('/clientes', [ClienteController::class, 'index'])->name('cliente.dashboard');
 Route::get('/clientes/crear', [ClienteController::class, 'create'])->name('cliente.crear');
