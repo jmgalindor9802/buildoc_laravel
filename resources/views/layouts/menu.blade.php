@@ -61,7 +61,7 @@
                 </li>
 
                 <li>
-                    <a href="..\Gestion_tareas\Tareas_dashboard.php" class="nav-link link-body-emphasis" >
+                    <a href="{{route('tarea.dashboard')}}" class="nav-link link-body-emphasis" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-card-checklist" viewBox="0 0 16 16" style="margin-right: 8px;">
                             <path

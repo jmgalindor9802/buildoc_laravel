@@ -27,3 +27,4 @@ Route::get('/inspeccion', [InspeccionController::class, 'index'])->name('inspecc
 Route::get('/inspeccion/programar-inspeccion', [InspeccionController::class, 'create'])->name('programar.inspeccion');
 Route::post('/inspeccion', [IncidenteController::class, 'store'])->name('inspeccion.store');
 Route::get('/tarea', [TareaController::class, 'index'])->name('tarea.dashboard');
+Route::get('/fase', [FaseController::class, 'index'])->name('crear.fase');
