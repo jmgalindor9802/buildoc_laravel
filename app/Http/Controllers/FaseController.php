@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Fase;
+use App\Models\Proyecto;
 
 class FaseController extends Controller
 {
@@ -24,7 +25,11 @@ class FaseController extends Controller
      */
     public function create(Request $request)
     {
-        return view('gestionTareas.createFase');
+        // Obtener todos los proyectos desde el modelo Proyecto
+        $proyectos = Proyecto::orderBy('proNombre')->get();
+
+    // Pasar los proyectos a la vista
+    return view('gestionTareas.createFase', compact('proyectos'));
 
     }
 

@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GaProyecto extends Model
+class Proyecto extends Model
 {
-    use HasFactory;
+    protected $table = 'ga_proyecto';
+    public $timestamps = false;
 }
