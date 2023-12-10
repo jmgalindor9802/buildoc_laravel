@@ -13,7 +13,7 @@
         <div class="col-12 custom-form vh-80">
             <br>
 
-                <form action="{{ route('fases.store') }}" method="post" class="needs-validation " style="max-height: 70vh; " novalidate>
+                <form action="{{ route('fase.store') }}"     class="needs-validation " style="max-height: 70vh; " novalidate>
                 @csrf
                     <!-- INSERTAR NOMBRE FASE -->
                     <div class="row g-3">   
