@@ -27,10 +27,17 @@ Route::post('/incidentes', [IncidenteController::class, 'store'])->name('inciden
 Route::get('/inspeccion', [InspeccionController::class, 'index'])->name('inspecciones.dashboard');
 Route::get('/inspeccion/programar-inspeccion', [InspeccionController::class, 'create'])->name('programar.inspeccion');
 Route::post('/inspeccion', [IncidenteController::class, 'store'])->name('inspeccion.store');
+
 Route::get('/tarea', [TareaController::class, 'index'])->name('tarea.dashboard');
+Route::get('/tarea/creartarea', [TareaController::class, 'create'])->name('crear.tarea');
+Route::get('/tarea/fases/{proyectoId}', [TareaController::class, 'getFasesByProyecto']);
+Route::post('/tarea/creartarea/guardar', [FaseController::class, 'store'])->name('tarea.store');
+
+
 Route::get('/fase', [FaseController::class, 'create'])->name('crear.fase');
 Route::post('/fase/guardar', [FaseController::class, 'store'])->name('fase.store');
-Route::get('/tarea/creartarea', [TareaController::class, 'create'])->name('crear.tarea');
+
+
 Route::get('/clientes', [ClienteController::class, 'index'])->name('cliente.dashboard');
 Route::get('/clientes/crear', [ClienteController::class, 'create'])->name('cliente.crear');
 Route::get('/proyectos', [ProyectoController::class, 'index'])->name('proyecto.dashboard');

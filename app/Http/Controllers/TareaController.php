@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Proyecto;
+use App\Models\Fase;
+use App\Models\gtTarea;
 
 class TareaController extends Controller
 {
@@ -24,8 +27,18 @@ class TareaController extends Controller
      */
     public function create()
     {
-        return view('gestionTareas.createTarea');
+        $proyectos = Proyecto::orderBy('proNombre')->get();
+        $fases = Fase::orderBy('fasNombre')->get();
+
+    // Pasar proyectos y fases a la vista
+    return view('gestionTareas.createTarea', compact('proyectos', 'fases'));
     }
+
+    public function getFasesByProyecto($proyectoId)
+{
+    $fases = Fase::where('fk_id_proyecto', $proyectoId)->orderBy('fasNombre')->get();
+    return response()->json($fases);
+}
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +48,18 @@ class TareaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tarea= new Tarea();
+
+        $tarea-> tarNombre = $request -> nombre;
+        $tarea-> tarDescripcion = $request -> descripcion;
+        $tarea-> tarPrioridad = $request -> prioridad;
+        $tarea-> tarFecha_limite = $request -> fechaLimite;
+        $tarea-> fk_id_fase = $request -> fase;
+        
+        $tarea-> save();
+
+       return view('gestionTareas.Tareadashboard');
+       return redirect()->route('/tarea')->with('success', 'Tarea creada exitosamente');
     }
 
     /**

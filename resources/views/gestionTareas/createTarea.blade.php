@@ -14,44 +14,31 @@
         <div class="col-12 custom-form vh-80">
             <br>
 
-                <form class="needs-validation " style="max-height: 70vh;  overflow-y;" novalidate method="post" action="crear_tarea.php" >
-                    <!-- INSERTAR PROYECTO CON LISTA DESPLEGABLE -->
+                <form class="needs-validation " style="max-height: 70vh;  overflow-y;"  method="post" action="{{ route('tarea.store') }}" >
+                @csrf    
+                <!-- INSERTAR PROYECTO CON LISTA DESPLEGABLE -->
                     <div class="row g-3 ">
                             <div class="col-sm-5" >
-                                    <label for="proyectoSelect" class="form-label">Proyecto</label>
-                                    <select  name="Proyecto_tarea" class="form-select" id="proyectoSelect" required onchange="cargarFases()">
-                                        <option value="">Elegir...</option>
-                                        <?php
-                                        /*require('../conexion.php');
+                            <label for="proyecto" class="form-label">Proyecto</label>
+                            <select name="proyecto" class="form-select" id="proyecto" required>
+                                <option value="">Elegir...</option>
 
-                                        // Verificar la conexión
-                                        if (!$conectar) {
-                                            die("Conexión fallida: " . mysqli_connect_error());
-                                        }
-                                        
-                                        // Consulta para obtener nombres e IDs de proyectos de la base de datos
-                                        $sql = "SELECT pk_id_proyecto, proNombre FROM ga_proyecto ORDER BY proNombre";
-                                        $result = mysqli_query($conectar, $sql);
-
-                                        // Rellenar opciones del select con los resultados de la consulta
-                                        if ($result && mysqli_num_rows($result) > 0) {
-                                            while($row = mysqli_fetch_assoc($result)) {
-                                                echo "<option value='" . $row["pk_id_proyecto"] . "'>" . $row["proNombre"] . "</option>";
-                                            }
-                                        }*/
-                                        ?>
-                                        </select>
-
+                                @if(isset($proyectos))
+                                    @foreach($proyectos as $proyecto)
+                                        <option value="{{ $proyecto->pk_id_proyecto }}">{{ $proyecto->proNombre }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        
                                         <div class="invalid-feedback">
-                                        Seleccione una fase.
+                                        Seleccione un proyecto.
                                         </div>
                                                 </div>
                                                 <div class="col-sm-5">
-                                                    <label for="faseSelect" class="form-label">Fase</label>
-                                                    <select name="Fase_tarea" class="form-select" id="faseSelect" required data-proyecto-id="">
+                                                <label for="fase" class="form-label">Fase</label>
+                                                    <select name="fase" class="form-select" id="fase" required>
                                                         <option value="">Elegir...</option>
                                                     </select>
-
                                                     <div class="invalid-feedback">
                                                         Seleccione una fase.
                                                     </div>
@@ -69,6 +56,7 @@
                                 Se requiere un nombre válido.
                             </div>
                         </div>
+                        
                         <div class="col-sm-5">
                             <label  for="fechaLimite" class="form-label">Fecha y hora
                                 límite</label>
@@ -187,12 +175,14 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
-    <!-- ... Tu script personalizado ... -->
-<script src="crear_tarea.js"></script>
+    <!-- ... Bibliotecas jQuery y Bootstrap ... -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+crossorigin="anonymous"></script>
+<!-- ... Tu script personalizado ... -->
+<script src="{{ asset('js/fase.js') }}"></script>
+
+
 <script>
 
 // Lógica para abrir el modal de confirmación

@@ -13,7 +13,7 @@ class CreateGtFasesTable extends Migration
      */
     public function up()
     {
-        Schema::create('gt_fases', function (Blueprint $table) {
+        Schema::create('gt_fase', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateGtFasesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gt_fases');
+        Schema::dropIfExists('gt_fase');
     }
 }

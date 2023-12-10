@@ -124,6 +124,7 @@ $(document).ready(function () {
 <script>
     console.log(@json($proyectos));
 </script>
+<script>{{asset('js\fase.js')}}</script>
 
 
 @endsection

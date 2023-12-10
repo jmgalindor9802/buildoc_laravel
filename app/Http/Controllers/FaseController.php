@@ -17,6 +17,15 @@ class FaseController extends Controller
     {
         return view('gestionTareas.createFase');
     }
+    public function getFasesByProyecto($proyectoId)
+    {
+    $fases = Fase::where('fk_id_proyecto', $proyectoId)->orderBy('fasNombre')->get();
+    return response()->json($fases);
+    }
+    public function __construct()
+    {
+    $this->middleware('web');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -32,6 +41,7 @@ class FaseController extends Controller
     return view('gestionTareas.createFase', compact('proyectos'));
 
     }
+    
 
     /**
      * Store a newly created resource in storage.

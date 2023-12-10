@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class GtTarea extends Model
 {
-    use HasFactory;
+    protected $table='gt_tarea';
+    public $timestamps = false;
 }
