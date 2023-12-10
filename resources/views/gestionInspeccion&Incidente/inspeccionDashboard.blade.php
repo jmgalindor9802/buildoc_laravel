@@ -38,20 +38,22 @@
         </tr>
       </thead>
       <tbody>
+        @foreach ($inspecciones as $inspeccion)
         <tr>
           <td>
+            {{ $inspeccion->insNombre }}
           </td>
           <td>
-            
+            {{ $inspeccion->insEstado }}
           </td>
           <td>
-
+            {{ optional($inspeccion)->proNombre }}
           </td>
           <td>
-            
+            {{ $inspeccion->insFecha_inicial }}
           </td>
           <td>
-            
+            {{ $inspeccion->insFecha_final }}
           </td>
           <td><button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -74,7 +76,7 @@
             </ul>
           </td>
         </tr>
-        
+        @endforeach
       </tbody>
     </table>
   </div>

@@ -10,10 +10,20 @@ class GiiIncidente extends Model
     use HasFactory;
 
     protected $table = 'gii_incidente';
-
     public $timestamps = false;
-    protected $PrimaryKey = 'pk_id_incidente';
-
+    protected $primaryKey = 'pk_id_incidente';
     
-
+    // Relacion
+    public function usuario() {
+        return $this->belongsTo(Usuario::class, 'fk_id_usuario');
+    }
+    public function proyecto() {
+        return $this->belongsTo(Proyecto::class, 'fk_id_proyecto');
+    }
+    public function seguimientos() {
+        return $this->hasMany(GiiSeguimiento::class, 'fk_id_incidente');
+    }
+    public function involucrados() {
+        return $this->hasMany(GiiInvolucrado::class, 'fk_id_incidente');
+    }
 }

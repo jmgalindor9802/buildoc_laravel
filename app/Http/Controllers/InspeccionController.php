@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Proyecto;
+use App\Models\GiiInspeccion;
+use Carbon\Carbon;
 
 class InspeccionController extends Controller
 {
@@ -14,7 +17,23 @@ class InspeccionController extends Controller
      */
     public function index()
     {
-        return view('gestionInspeccion&Incidente.inspeccionDashboard');
+        $inspecciones = GiiInspeccion::select(
+            'gii_inspeccion.pk_id_inspeccion',
+            'gii_inspeccion.insNombre',
+            'gii_inspeccion.insEstado',
+            'gii_inspeccion.insFecha_inicial',
+            'gii_inspeccion.insFecha_final',
+            'ga_proyecto.proNombre'
+        )
+            ->join('ga_proyecto', 'gii_inspeccion.fk_id_proyecto', '=', 'ga_proyecto.pk_id_proyecto')
+            ->with('proyecto')
+            ->get();
+        // Formatear la fecha usando Carbon
+        foreach ($inspecciones as $inspeccion) {
+            $inspeccion->insFecha_inicial = Carbon::parse($inspeccion->insFecha_inicial)->format('j M Y');
+            $inspeccion->insFecha_final = Carbon::parse($inspeccion->insFecha_final)->format('j M Y');
+        }
+        return view('gestionInspeccion&Incidente.inspeccionDashboard', compact('inspecciones'));
     }
 
     /**
@@ -24,7 +43,8 @@ class InspeccionController extends Controller
      */
     public function create()
     {
-        return view('gestionInspeccion&Incidente.programarInspeccion');
+        $proyectos = Proyecto::orderBy('proNombre')->get();
+        return view('gestionInspeccion&Incidente.programarInspeccion', compact('proyectos'));
     }
 
     /**

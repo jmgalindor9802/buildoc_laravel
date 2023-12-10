@@ -13,7 +13,8 @@
         <div class="col-12 custom-form vh-80">
             <br>
 
-            <form action="{{ route('incidentes.store') }}" method="POST" class="needs-validation " style="max-height: 70vh" novalidate>
+            <form action="{{ route('incidentes.store') }}" method="POST" class="needs-validation " style="max-height: 70vh"
+                novalidate>
                 @csrf
                 <div class="row g-3">
                     <div class="col-sm-6">
@@ -29,7 +30,11 @@
                         <select name="Proyecto_incidente" class="form-select" id="proyecto" required height="100px"
                             width="100%">
                             <option value="">Seleccionar...</option>
-                            <option value="Proyecto prueba">Proyecto prueba</option>
+                            @if (isset($proyectos))
+                                @foreach ($proyectos as $proyecto)
+                                    <option value="{{ $proyecto->pk_id_proyecto }}">{{ $proyecto->proNombre }}</option>
+                                @endforeach
+                            @endif
                         </select>
                         <div class="invalid-feedback">
                             Se requiere un proyecto válido.
@@ -119,4 +124,7 @@
             </form>
         </div>
     </div>
+    <script>
+        console.log(@json($proyectos));
+    </script>
 @endsection

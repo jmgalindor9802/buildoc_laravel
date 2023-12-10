@@ -40,21 +40,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($incidentes as $incidente)
                         <tr>
                             <td>
-                                
+                                {{ $incidente->incNombre }}
                             </td>
                             <td>
-                                
+                                {{ $incidente->incEstado }}
                             </td>
                             <td>
-                                
+                                {{ $incidente->incGravedad }}
                             </td>
                             <td>
-                                
+                                {{ optional($incidente)->proNombre }}
                             </td>
                             <td>
-                                
+                                {{ $incidente->incFecha }}
                             </td>
                             <td><button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -82,6 +83,7 @@
                                 </ul>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

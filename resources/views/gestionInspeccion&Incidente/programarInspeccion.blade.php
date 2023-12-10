@@ -13,13 +13,19 @@
         <div class="col-12 custom-form vh-80">
             <br>
 
-            <form action="{{route('inspeccion.store')}}" method="POST" class="needs-validation " style="max-height: 70vh" novalidate>
+            <form action="{{ route('inspeccion.store') }}" method="POST" class="needs-validation " style="max-height: 70vh"
+                novalidate>
                 @csrf
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label for="proyecto" class="form-label">Proyecto</label>
                         <select name="proyecto_inspeccion" class="form-select" id="proyecto" required>
                             <option value="">Seleccionar...</option>
+                            @if (isset($proyectos))
+                                @foreach ($proyectos as $proyecto)
+                                    <option value="{{ $proyecto->pk_id_proyecto }}">{{ $proyecto->proNombre }}</option>
+                                @endforeach
+                            @endif
                         </select>
                         <div class="invalid-feedback">
                             Se requiere seleccionar un proyecto válido.
@@ -140,5 +146,7 @@
         </div>
         </form>
     </div>
-    </div>
+    <script>
+        console.log(@json($proyectos));
+    </script>
 @endsection
