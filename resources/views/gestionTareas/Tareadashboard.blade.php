@@ -38,13 +38,13 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td scope="row"></td>
-                        <td scope="row"></td>
-                        <td scope="row"></td>
-                        <td scope="row"></td>
-                        <td scope="row"></td>
                         <td></td>
-                        <td scope="row">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
                             <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
