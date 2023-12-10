@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Fase;
 
-class TareaController extends Controller
+class FaseController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('gestionTareas.Tareadashboard');
+        return view('gestionTareas.createFase');
     }
 
     /**
@@ -22,9 +22,10 @@ class TareaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('gestionTareas.createTarea');
+        return view('gestionTareas.createFase');
+
     }
 
     /**
@@ -35,7 +36,16 @@ class TareaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fase= new Fase();
+
+        $fase-> fasNombre = $request -> nombre;
+        $fase-> fk_id_proyecto = $request -> proyecto;
+        $fase-> fasDescripcion = $request -> descripcion;
+        $fase-> save();
+
+       return view('gestionTareas.Tareadashboard');
+       return redirect()->route('/tarea')->with('success', 'Fase creada exitosamente');
+
     }
 
     /**

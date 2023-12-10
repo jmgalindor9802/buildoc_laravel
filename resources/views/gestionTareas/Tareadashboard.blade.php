@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('tituloform', 'Programar inspeccion')
 @section('content')
+
     <div class="col-lg-10">
         <nav aria-label="breadcrumb" class=" align-items-center  ">
             <ol class="breadcrumb">
@@ -11,10 +12,10 @@
         <div style="padding-right:5%">
             <h4 class="mb-3">Tareas </h4>
             <form id="formProyecto" method="post" action="Tareas_dashboard.php">
-                <a href="crear_tarea_form.php"><button class="btn btn-lg float-end custom-btn" type="button"
+                <a href="{{route('crear.tarea')}}"><button class="btn btn-lg float-end custom-btn" type="button"
                         style="font-size: 15px; margin-right:1%">+ Crear
                         tarea</button></a>
-                <a href="create_fase_form.php"><button class="btn btn-lg float-end custom-btn" type="button"
+                <a href="{{route('crear.fase')}}"><button class="btn btn-lg float-end custom-btn" type="button"
                         style="font-size: 15px ;margin-right:1% ">+ Crear fase</button></a>
                 <h1 class="display-6">Tareas próximas</h1>
                 <div class="dropdown">

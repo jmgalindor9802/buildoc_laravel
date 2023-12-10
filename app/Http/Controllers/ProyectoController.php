@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class TareaController extends Controller
+class ProyectoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class TareaController extends Controller
      */
     public function index()
     {
-        return view('gestionTareas.Tareadashboard');
+        return view('gestionSistema.proyectoDashboard');
     }
 
     /**
@@ -24,7 +23,7 @@ class TareaController extends Controller
      */
     public function create()
     {
-        return view('gestionTareas.createTarea');
+        return view('gestionSistema.crearProyecto');
     }
 
     /**
