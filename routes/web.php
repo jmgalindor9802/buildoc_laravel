@@ -8,6 +8,7 @@ use App\Http\Controllers\InspeccionController;
 use App\Http\Controllers\TareaController;
 use App\Http\Controllers\FaseController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ProyectoController;
 
 
 Route::get('/', function () {
@@ -33,3 +34,5 @@ Route::get('/fase', [FaseController::class, 'index'])->name('crear.fase');
 Route::get('/tarea/creartarea', [TareaController::class, 'create'])->name('crear.tarea');
 Route::get('/clientes', [ClienteController::class, 'index'])->name('cliente.dashboard');
 Route::get('/clientes/crear', [ClienteController::class, 'create'])->name('cliente.crear');
+Route::get('/proyectos', [ProyectoController::class, 'index'])->name('proyecto.dashboard');
+Route::get('/proyectos/crearproyecto', [ProyectoController::class, 'create'])->name('proyecto.crear');
