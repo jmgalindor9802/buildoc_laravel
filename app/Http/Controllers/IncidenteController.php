@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Proyecto;
+use App\Models\GiiIncidente;
+use Carbon\Carbon;
 
 class IncidenteController extends Controller
 {
@@ -14,7 +17,22 @@ class IncidenteController extends Controller
      */
     public function index()
     {
-        return view('gestionInspeccion&Incidente.incidenteDashboard');
+        $incidentes = GiiIncidente::select(
+            'gii_incidente.pk_id_incidente',
+            'gii_incidente.incNombre',
+            'gii_incidente.incEstado',
+            'gii_incidente.incGravedad',
+            'gii_incidente.incFecha',
+            'ga_proyecto.proNombre'
+        )
+            ->join('ga_proyecto', 'gii_incidente.fk_id_proyecto', '=', 'ga_proyecto.pk_id_proyecto')
+            ->with('proyecto') // Cargar la relación proyecto
+            ->get();
+        // Formatear la fecha usando Carbon
+        foreach ($incidentes as $incidente) {
+            $incidente->incFecha = Carbon::parse($incidente->incFecha)->format('j M Y');
+        }
+        return view('gestionInspeccion&Incidente.incidenteDashboard', compact('incidentes'));
     }
 
     /**
@@ -24,7 +42,8 @@ class IncidenteController extends Controller
      */
     public function create()
     {
-        return view('gestionInspeccion&Incidente.ReportarIncidente');
+        $proyectos = Proyecto::orderBy('proNombre')->get();
+        return view('gestionInspeccion&Incidente.ReportarIncidente', compact('proyectos'));
     }
 
     /**
