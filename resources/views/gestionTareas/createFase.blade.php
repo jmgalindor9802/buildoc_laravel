@@ -13,7 +13,7 @@
         <div class="col-12 custom-form vh-80">
             <br>
 
-                <form action="{{ route('fases.store') }}" method="post" class="needs-validation " style="max-height: 70vh; " novalidate>
+                <form action="{{ route('fase.store') }}"  method="post"   class="needs-validation " style="max-height: 70vh; " novalidate>
                 @csrf
                     <!-- INSERTAR NOMBRE FASE -->
                     <div class="row g-3">   
@@ -27,32 +27,18 @@
                         </div>
                         <!-- INSERTAR PROYECTO CON LISTA DESPLEGABLE -->
                         <div class="col-md-6">
-                            <label for="country" class="form-label">Proyecto</label>
-                            <select name="proyecto" class="form-select" id="country" required>
+                            <label for="proyecto" class="form-label">Proyecto</label>
+                            <select name="proyecto" class="form-select" id="proyecto" required>
                                 <option value="">Elegir...</option>
-                                <option value="1">Proyecto 1</option>
-                                <option value="2">Proyecto 2</option>
-                                
-                                <?php
-                                /*require('../conexion.php');
 
-                                // Verificar la conexión
-                                if (!$conectar) {
-                                    die("Conexión fallida: " . mysqli_connect_error());
-                                }
-
-                                // Consulta para obtener nombres e IDs de proyectos de la base de datos
-                                $sql = "SELECT pk_id_proyecto, proNombre FROM ga_proyecto ORDER BY proNombre";
-                                $result = mysqli_query($conectar, $sql);
-
-                                // Rellenar opciones del select con los resultados de la consulta
-                                if ($result && mysqli_num_rows($result) > 0) {
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option value='" . $row["pk_id_proyecto"] . "'>" . $row["proNombre"] . "</option>";
-                                    }
-                                }*/
-                                ?>
+                                @if(isset($proyectos))
+                                    @foreach($proyectos as $proyecto)
+                                        <option value="{{ $proyecto->pk_id_proyecto }}">{{ $proyecto->proNombre }}</option>
+                                    @endforeach
+                                @endif
                             </select>
+                        </div>
+
 
                             <div class="invalid-feedback">
                                 Seleccione una fase.
@@ -134,5 +120,10 @@ $(document).ready(function () {
   });
 });
 </script>
+
+<script>
+    console.log(@json($proyectos));
+</script>
+
 
 @endsection
