@@ -14,7 +14,12 @@ class ComentarioArchivo extends Model
     protected $PrimaryKey = 'pk_id_comentario_archivo';
 
     // Relacion
-    public function usuario() {
+    public function usuario()
+    {
         return $this->belongsTo(Usuario::class, 'fk_id_usuario');
+    }
+    public function archivo()
+    {
+        return $this->belongsTo(GaArchivo::class, 'fk_id_archivo');
     }
 }
