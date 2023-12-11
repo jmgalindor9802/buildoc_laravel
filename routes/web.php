@@ -31,17 +31,20 @@ Route::get('/inspeccion', [InspeccionController::class, 'index'])->name('inspecc
 Route::get('/inspeccion/programar-inspeccion', [InspeccionController::class, 'create'])->name('programar.inspeccion');
 Route::post('/inspeccion', [IncidenteController::class, 'store'])->name('inspeccion.store');
 
+//TAREAS
 Route::get('/tarea', [TareaController::class, 'index'])->name('tarea.dashboard');
 Route::get('/tarea/creartarea', [TareaController::class, 'create'])->name('crear.tarea');
-Route::get('/tarea/mostrartarea', [TareaController::class, 'show'])->name('tarea.show');
+Route::get('/tarea/mostrartarea/{id}', [TareaController::class, 'show'])->name('tarea.show');
 
 Route::post('/tarea/creartarea/guardar', [TareaController::class, 'store'])->name('tarea.store');
 
-// Ruta para mostrar el formulario de edición
+//Edición
 Route::get('/tarea/{id}/edit', [TareaController::class, 'edit'])->name('tarea.edit');
 
-// Ruta para manejar la actualización de la tarea
+//Actualización de la tarea
 Route::put('/tarea/{id}', [TareaController::class, 'update'])->name('tarea.update');
+//elininar tarea
+Route::delete('/tarea/destroy/{id}', [TareaController::class, 'destroy'])->name('tarea.destroy');
 
 
 

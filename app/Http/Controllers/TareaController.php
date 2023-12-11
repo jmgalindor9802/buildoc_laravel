@@ -91,27 +91,18 @@ class TareaController extends Controller
      */
     public function show($id)
     {
-        return view('eliminarTarea');
+        $tarea = Tarea::find($id);
+        return view('gestionTareas.eliminarTarea', compact('tarea'));
     }
-
-    
 
     public function edit($id)
     {
         $tarea = Tarea::find($id);
-        $proyectos = Proyecto::orderBy('proNombre')->get();
-        $fases = Fase::orderBy('fasNombre')->get();
-
-        return view('gestionTareas.editTarea', compact('tarea', 'proyectos', 'fases'));
+        
+        return view('gestionTareas.editTarea', compact('tarea'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -119,8 +110,6 @@ class TareaController extends Controller
             'tarDescripcion' => 'required|string|max:450',
             'tarPrioridad' => 'required|in:ALTA,BAJA',
             'tarFechaLimite' => 'required|date',
-            'tarProyecto' => 'required|exists:proyectos,pk_id_proyecto',
-            'tarFase' => 'required|exists:fases,pk_id_fase',
         ]);
 
         $tarea = Tarea::find($id);
@@ -128,15 +117,11 @@ class TareaController extends Controller
         $tarea->tarNombre = $request->tarNombre;
         $tarea->tarDescripcion = $request->tarDescripcion;
         $tarea->tarPrioridad = $request->tarPrioridad;
-        $tarea->tarFechaLimite = $request->tarFechaLimite;
-        $tarea->fk_id_fase = $request->tarFase;
-
-        // Puedes asignar el proyecto directamente o guardar la relación según tu modelo
-        $tarea->fk_id_proyecto = $request->tarProyecto;
+        $tarea->tarFecha_limite  = $request->tarFechaLimite;
 
         $tarea->save();
 
-        return redirect()->route('tarea.index')->with('success', 'Tarea actualizada exitosamente');
+        return redirect()->route('tarea.dashboard')->with('success', 'Tarea actualizada exitosamente');
     }
 
     /**
@@ -147,6 +132,8 @@ class TareaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tarea = Tarea::find($id);
+        $tarea->delete();
+        return redirect()->route('tarea.dashboard')->with('success', 'Tarea eliminada exitosamente');
     }
 }

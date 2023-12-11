@@ -87,25 +87,10 @@
             <div class="col-md-5">               
                             <!-- Botón "Guardar tarea" que abre el modal -->
                         <button class="btn btn-lg float-end custom-btn" id="guardarTareaButton"
-                        style="font-size: 15px;">Guardar tarea</button>
+                        style="font-size: 15px;">Actualizar tarea</button>
 
                         @include('components.modalConfirmacion')
                         
-                                        <!-- Modal de éxito -->
-                                        <div class="modal fade" id="successModal" tabindex="-1" role="dialog"
-                                        aria-labelledby="successModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="successModalLabel">Éxito</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    La tarea se ha creado exitosamente.
-                                                </div>
-                                            </div>
-
                                         </div>
                            
                         </div>
