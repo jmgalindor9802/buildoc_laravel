@@ -11,7 +11,7 @@ class Usuario extends Model
     // Configuracion de la tabla
     protected $table = 'usuario';
     public $timestamps = false;
-    protected $PrimaryKey = 'pk_id_usuario';
+    protected $primaryKey = 'pk_id_usuario';
 
     // Relaciones
     public function carpetas()

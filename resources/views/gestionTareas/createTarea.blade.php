@@ -18,10 +18,10 @@
                 @csrf    
                 <!-- INSERTAR PROYECTO CON LISTA DESPLEGABLE -->
                     <div class="row g-3 ">
-                            <div class="col-sm-5" >
+                            <div class="col-sm-6" >
                             <label for="proyecto" class="form-label">Proyecto</label>
                             <select name="tarProyecto" class="form-select" id="proyecto" required>
-                                <option value="">Elegir...</option>
+                            <option value="" disabled selected>Seleccionar...</option>
 
                                 @if(isset($proyectos))
                                     @foreach($proyectos as $proyecto)
@@ -34,10 +34,12 @@
                                         Seleccione un proyecto.
                                         </div>
                                                 </div>
-                                                <div class="col-sm-5">
+                                                <div class="col-sm-6">
                                                 <label for="fase" class="form-label">Fase</label>
                                                     <select name="tarFase" class="form-select" id="fase" required>
-                                                        <option value="">Elegir...</option>
+                                                    <option value="" disabled selected>Seleccionar...</option>
+                                                    <option value="1">Fase 1</option>
+                                                        <option value="2">Fase 2</option>
                                                     </select>
                                                     <div class="invalid-feedback">
                                                         Seleccione una fase.
@@ -47,7 +49,7 @@
                                     
                     <br>
                     <div class="row g-3">
-                        <div class="col-sm-5">
+                        <div class="col-sm">
                             <label for="Nombre_Tarea" class="form-label">Nombre de la
                                 tarea</label>
                             <input name="tarNombre" type="text" class="form-control" id="Nombre_Tarea" placeholder="Nombre de la tarea"
@@ -57,7 +59,7 @@
                             </div>
                         </div>
                         
-                        <div class="col-sm-5">
+                        <div class="col-sm">
                             <label  for="fechaLimite" class="form-label">Fecha y hora
                                 límite</label>
                             <input name="tarFechaLimite" type="datetime-local" class="form-control" id="fechaLimite" required>
@@ -68,22 +70,7 @@
                                 La fecha y hora límite debe ser posterior a la actual.
                             </div>
                         </div>
-                    </div>
-                    <br>
-
-                    <div class="row g-3">
-                    <div class="col-sm-10">
-                        <label for="descripcionTarea" class="form-label">Descripción</label>
-                        <textarea name="tarDescripcion" class="form-control" id="descripcionTarea" rows="4"
-                            placeholder="Descripción de la tarea" required maxlength="450"></textarea>
-                        <div class="invalid-feedback">
-                            Se requiere una descripción válida.
-                        </div>
-                    </div>
-                    </div>
-                    <br>
-                    <div class="row g-3">
-                        <div class="col-md-5">
+                        <div class="col-md">
                             <label for="prioridad" class="form-label">Prioridad</label>
                             <select name="tarPrioridad" class="form-select" id="prioridad" required>
                                 <option value="" disabled selected>Seleccionar...</option>
@@ -94,9 +81,21 @@
                                 Seleccione una prioridad.
                             </div>
                         </div>
-
-                       
                     </div>
+                    <br>
+
+                    <div class="row g-3">
+                    <div class="col-sm-12">
+                        <label for="descripcionTarea" class="form-label">Descripción</label>
+                        <textarea name="tarDescripcion" class="form-control" id="descripcionTarea" rows="4"
+                            placeholder="Descripción de la tarea" required maxlength="450"></textarea>
+                        <div class="invalid-feedback">
+                            Se requiere una descripción válida.
+                        </div>
+                    </div>
+                    </div>
+                    <br>
+              
                     <br>
                    
                             <div class="row g-3" >

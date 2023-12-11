@@ -27,10 +27,11 @@ class Proyecto extends Model
         return $this->hasMany(GaArchivo::class, 'fk_id_proyecto');
     }
 
-    public function fases()
-    {
-        return $this->hasMany(GtFase::class, 'fk_id_proyecto');
-    }
+    public function fase()
+{
+    return $this->hasMany(Fase::class);
+}
+
 
     public function inspecciones()
     {
