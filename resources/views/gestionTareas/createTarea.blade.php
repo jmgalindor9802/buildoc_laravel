@@ -14,13 +14,13 @@
         <div class="col-12 custom-form vh-80">
             <br>
 
-                <form class="needs-validation " style="max-height: 70vh;  overflow-y;"  method="post" action="{{ route('tarea.store') }}" >
+                <form action="{{ route('tarea.store') }}" class="needs-validation " style="max-height: 70vh;  overflow-y;"  method="post"  >
                 @csrf    
                 <!-- INSERTAR PROYECTO CON LISTA DESPLEGABLE -->
                     <div class="row g-3 ">
                             <div class="col-sm-5" >
                             <label for="proyecto" class="form-label">Proyecto</label>
-                            <select name="proyecto" class="form-select" id="proyecto" required>
+                            <select name="tarProyecto" class="form-select" id="proyecto" required>
                                 <option value="">Elegir...</option>
 
                                 @if(isset($proyectos))
@@ -36,7 +36,7 @@
                                                 </div>
                                                 <div class="col-sm-5">
                                                 <label for="fase" class="form-label">Fase</label>
-                                                    <select name="fase" class="form-select" id="fase" required>
+                                                    <select name="tarFase" class="form-select" id="fase" required>
                                                         <option value="">Elegir...</option>
                                                     </select>
                                                     <div class="invalid-feedback">
@@ -50,7 +50,7 @@
                         <div class="col-sm-5">
                             <label for="Nombre_Tarea" class="form-label">Nombre de la
                                 tarea</label>
-                            <input name="Nombre_Tarea" type="text" class="form-control" id="Nombre_Tarea" placeholder="Nombre de la tarea"
+                            <input name="tarNombre" type="text" class="form-control" id="Nombre_Tarea" placeholder="Nombre de la tarea"
                                 required>
                             <div class="invalid-feedback">
                                 Se requiere un nombre válido.
@@ -60,7 +60,7 @@
                         <div class="col-sm-5">
                             <label  for="fechaLimite" class="form-label">Fecha y hora
                                 límite</label>
-                            <input name="fechaLimite" type="datetime-local" class="form-control" id="fechaLimite" required>
+                            <input name="tarFechaLimite" type="datetime-local" class="form-control" id="fechaLimite" required>
                             <div class="invalid-feedback">
                                 Seleccione una fecha y hora válida.
                             </div>
@@ -74,7 +74,7 @@
                     <div class="row g-3">
                     <div class="col-sm-10">
                         <label for="descripcionTarea" class="form-label">Descripción</label>
-                        <textarea name="descripcionTarea" class="form-control" id="descripcionTarea" rows="4"
+                        <textarea name="tarDescripcion" class="form-control" id="descripcionTarea" rows="4"
                             placeholder="Descripción de la tarea" required maxlength="450"></textarea>
                         <div class="invalid-feedback">
                             Se requiere una descripción válida.
@@ -85,10 +85,10 @@
                     <div class="row g-3">
                         <div class="col-md-5">
                             <label for="prioridad" class="form-label">Prioridad</label>
-                            <select name="prioridad" class="form-select" id="prioridad" required>
-                                <option value="">Seleccionar</option>
-                                <option value="1">Alta</option>
-                                <option value="2">Baja</option>
+                            <select name="tarPrioridad" class="form-select" id="prioridad" required>
+                                <option value="" disabled selected>Seleccionar...</option>
+                                <option value="ALTA">Alta</option>
+                                <option value="BAJA">Baja</option>
                             </select>
                             <div class="invalid-feedback">
                                 Seleccione una prioridad.

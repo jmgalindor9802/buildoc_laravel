@@ -33,8 +33,9 @@ Route::post('/inspeccion', [IncidenteController::class, 'store'])->name('inspecc
 
 Route::get('/tarea', [TareaController::class, 'index'])->name('tarea.dashboard');
 Route::get('/tarea/creartarea', [TareaController::class, 'create'])->name('crear.tarea');
-Route::get('/tarea/fases/{proyectoId}', [TareaController::class, 'getFasesByProyecto']);
-Route::post('/tarea/creartarea/guardar', [FaseController::class, 'store'])->name('tarea.store');
+Route::get('/tarea/creartarea/{proyectoId}', [TareaController::class, 'getFasesByProyecto']);
+Route::post('/tarea/creartarea/guardar', [TareaController::class, 'store'])->name('tarea.store');
+
 
 
 Route::get('/fase', [FaseController::class, 'create'])->name('crear.fase');

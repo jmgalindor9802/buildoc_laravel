@@ -2,18 +2,19 @@
 $(document).ready(function () {
     // Manejar el cambio en el select de proyectos
     $('#proyecto').change(function () {
+        console.log('Proyecto seleccionado:', $(this).val());
         var proyectoId = $(this).val();
 
         // Hacer la solicitud AJAX para obtener las fases del proyecto seleccionado
         $.ajax({ 
             
-            url: '{{ url("/tarea/fases") }}/' + proyectoId,
+            url: route('tarea.getFasesByProyecto', {proyectoId: proyectoId}),
 
             type: 'GET',
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     },
-            success: function (data) {
+    success: function (data) {
                 // Limpiar las opciones actuales
                 $('#fase').empty();
 
