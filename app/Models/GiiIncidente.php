@@ -12,6 +12,16 @@ class GiiIncidente extends Model
     protected $table = 'gii_incidente';
     public $timestamps = false;
     protected $primaryKey = 'pk_id_incidente';
+    protected $fillable = [
+        'incNombre',
+        'incDescripcion',
+        'incEstado',
+        'incGravedad',
+        'incSugerencias',
+        'fk_id_usuario',
+        'fk_id_proyecto',
+        // Agrega aquí otros campos si es necesario
+    ];
     
     // Relacion
     public function usuario() {

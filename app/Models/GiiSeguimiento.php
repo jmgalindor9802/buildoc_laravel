@@ -13,6 +13,11 @@ class GiiSeguimiento extends Model
     protected $primaryKey = 'pk_id_seguimiento';
     public $timestamps = false;
 
+    protected $fillable = [
+        'actDescripcion',
+        'actSugerencia',
+        'fk_id_incidente',
+    ];
     // Relacion
     public function incidente()
     {
