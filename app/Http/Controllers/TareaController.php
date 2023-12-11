@@ -21,30 +21,9 @@ class TareaController extends Controller
     public function index()
 {
     // Utilizar Eloquent para cargar las relaciones
-    $tareas = Tarea::with(['fase.proyecto'])->get();
-
-   
-
-    // Formatear fechas usando Carbon
-    foreach ($tareas as $tarea) {
-        $tarea->tarFecha_creacion = Carbon::parse($tarea->tarFecha_creacion)->format('j M Y');
-        $tarea->tarFecha_limite = Carbon::parse($tarea->tarFecha_limite)->format('j M Y');
-    }
-
+    $tareas = Tarea::orderBy('tarFecha_limite','desc')->paginate(5);
     return view('gestionTareas.Tareadashboard', compact('tareas'));
-
-
-    
 }
-
-    
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $proyectos = Proyecto::orderBy('proNombre')->get();
