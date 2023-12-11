@@ -23,6 +23,25 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
+
+    <script>
+
+        $(function () {
+            // Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
+            $("#adicional").on('click', function () {
+                $("#tablaInvolucradoForm tbody tr:eq(0)").clone().removeClass('fila-fija').appendTo("#tablaInvolucradoForm");
+            });
+
+            $(document).on("click", ".eliminar", function () {
+                var parent = $(this).parents().get(0);
+                // Eliminamos la fila
+                $(parent).remove();
+                // Eliminamos todos los elementos del input
+                $(parent).find("input").empty();
+            });
+        });
+    </script>
 </head>
 <body>
     <div id="app">

@@ -12,6 +12,7 @@ class GiiInvolucrado extends Model
     protected $table = 'gii_involucrado';
     protected $primaryKey = 'pk_id_involucrado';
     public $timestamps = false;
+    protected $fillable = ['invNombre', 'invApellido', 'invNumDocumento', 'invJustificacion', 'fk_id_incidente'];
 
     // Relacion
     public function incidente()

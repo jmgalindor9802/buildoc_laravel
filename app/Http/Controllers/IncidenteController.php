@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Proyecto;
 use App\Models\GiiIncidente;
+use App\Models\GiiSeguimiento;
 use Carbon\Carbon;
 
 class IncidenteController extends Controller
@@ -54,7 +55,33 @@ class IncidenteController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // Validar el formulario aquí si es necesario
+        $request->validate([
+            'Nombre_incidente' => 'required',
+            'Proyecto_incidente' => 'required',
+            'Descripcion_incidente' => 'required',
+            'Gravedad_incidente' => 'required',
+            // Añade otras reglas de validación según sea necesario
+        ]);
+
+        // Crear un nuevo incidente
+        $incidente = GiiIncidente::create([
+            'incNombre' => $request->input('Nombre_incidente'),
+            'incDescripcion' => $request->input('Descripcion_incidente'),
+            'incEstado' => 'INICIALIZADO',
+            'incGravedad' => $request->input('Gravedad_incidente'),
+            'incSugerencias' => $request->input('Sugerencia_incidente'),
+            'fk_id_usuario' => 1011234567, // Reemplaza esto con la lógica para obtener el autor
+            'fk_id_proyecto' => $request->input('Proyecto_incidente'),
+        ]);
+
+        // Obtener el ID del nuevo incidente
+        $lastIncidenteId = $incidente->pk_id_incidente;
+
+        // Llamar al método del controlador de Involucrado para almacenar involucrados
+        app(InvolucradoController::class)->store($request, $lastIncidenteId);
+
+        return redirect()->route('incidentes.dashboard')->with('success', 'Incidente reportado exitosamente.');
     }
 
     /**
@@ -76,7 +103,11 @@ class IncidenteController extends Controller
      */
     public function edit($id)
     {
-        //
+        // Obtener el incidente que se va a editar
+        $incidente = GiiIncidente::findOrFail($id);
+        $proyectos = Proyecto::orderBy('proNombre')->get();
+
+        return view('gestionInspeccion&Incidente.seguimientoIncidente', compact('incidente', 'proyectos'));
     }
 
     /**
@@ -88,7 +119,27 @@ class IncidenteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validar el formulario aquí si es necesario
+        $request->validate([
+            'Descripcion_incidente' => 'required',
+            'Sugerencia_incidente' => 'required',
+            // Agrega otras reglas de validación según sea necesario
+        ]);
+
+        // Obtener el incidente que se va a actualizar
+        $incidente = GiiIncidente::findOrFail($id);
+
+        // Almacenar un nuevo seguimiento
+        $seguimiento = GiiSeguimiento::create([
+            'actDescripcion' => $request->input('Descripcion_incidente'),
+            'actSugerencia' => $request->input('Sugerencia_incidente'),
+            'fk_id_incidente' => $incidente->pk_id_incidente,
+        ]);
+
+        // Llamar al método del controlador de Involucrado para almacenar nuevos involucrados
+        app(InvolucradoController::class)->update($request, $incidente->pk_id_incidente);
+
+        return redirect()->route('incidentes.dashboard')->with('success', 'Seguimiento guardado exitosamente.');
     }
 
     /**
@@ -99,6 +150,8 @@ class IncidenteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $incidente = GiiIncidente::findOrFail($id);
+        $incidente->delete();
+        return redirect()->route('incidentes.dashboard')->with('success', 'Incidente eliminado exitosamente.');
     }
 }

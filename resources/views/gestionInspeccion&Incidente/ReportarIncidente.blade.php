@@ -12,6 +12,17 @@
         <h4 class="mb-3 custom-form">Reportar incidente</h4>
         <div class="col-12 custom-form vh-80">
             <br>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <strong>Error al enviar el formulario</strong>
+                    <br>
+                    <ul>
+                        @foreach ($errors->all() as $eroor)
+                            <li>{{$eroor}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             <form action="{{ route('incidentes.store') }}" method="POST" class="needs-validation " style="max-height: 70vh"
                 novalidate>
@@ -44,7 +55,7 @@
                     <!-- Sub lista de involucrados -->
                     <div class="mb-12">
                         <h5>Agregar Involucrados:</h5>
-                        <table class="table bg-info" id="tabla">
+                        <table class="table bg-info" id="tablaInvolucradoForm">
                             <tr class="fila-fija">
                                 <td><input name="Nombre_involucrado[]" placeholder="Nombre" /></td>
                                 <td><input name="Apellido_involucrado[]" placeholder="Apellido" /></td>
@@ -127,4 +138,5 @@
     <script>
         console.log(@json($proyectos));
     </script>
+    <script>{{asset('js\ReportarIncidente.js')}}</script>
 @endsection
