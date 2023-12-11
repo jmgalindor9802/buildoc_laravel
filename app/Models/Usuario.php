@@ -39,14 +39,19 @@ class Usuario extends Model
         return $this->belongsToMany(GaProyecto::class, 'usuarios_proyectos', 'fk_id_usuario', 'fk_id_proyecto');
     }
 
+    
     public function tareas()
     {
-        return $this->belongsToMany(GtTarea::class, 'usuarios_gt_tareas', 'fk_id_usuario', 'fk_id_tarea');
+        return $this->belongsToMany(Tarea::class, 'usuarios_gt_tareas', 'fk_id_usuario', 'fk_id_tarea', 'pk_id_usuario', 'pk_id_tarea');
     }
-
     // Agrega la relación con la tabla usuarios_proyectos
     public function proyectosUsuarios()
     {
         return $this->belongsToMany(GaProyecto::class, 'usuarios_proyectos', 'fk_id_usuario', 'fk_id_proyecto');
+    }
+
+    public function getNombreCompletoAttribute()
+    {
+        return $this->attributes['nombre'] . ' ' . $this->attributes['apellido'];
     }
 }

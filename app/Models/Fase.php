@@ -12,13 +12,14 @@ class Fase extends Model
     protected $primaryKey = 'pk_id_fase';
 
     // Relacion
-    public function proyecto()
+
+public function proyecto()
 {
-    return $this->belongsTo(Proyecto::class, 'fk_id_proyecto');
+    return $this->belongsTo(Proyecto::class, 'fk_id_proyecto', 'pk_id_proyecto');
 }
-    public function tarea()
-    {
-        return $this->hasMany(Tarea::class, 'fase_id', 'pk_id_fase');
-    }
+public function tareas()
+{
+    return $this->hasMany(Tarea::class, 'fk_id_fase', 'pk_id_fase');
+}
     
 }

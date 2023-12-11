@@ -21,7 +21,7 @@ class TareaController extends Controller
     public function index()
 {
     // Utilizar Eloquent para cargar las relaciones
-    $tareas = Tarea::with(['fase.proyecto', 'responsable'])->get();
+    $tareas = Tarea::with(['fase.proyecto', 'responsables'])->get();
 
     // Formatear fechas usando Carbon
     foreach ($tareas as $tarea) {
