@@ -49,9 +49,8 @@ class Usuario extends Model
     {
         return $this->belongsToMany(GaProyecto::class, 'usuarios_proyectos', 'fk_id_usuario', 'fk_id_proyecto');
     }
-
-    public function getNombreCompletoAttribute()
+    public function nombreCompleto()
     {
-        return $this->attributes['nombre'] . ' ' . $this->attributes['apellido'];
+        return $this->usuNombre . ' ' . $this->usuApellido;
     }
 }
