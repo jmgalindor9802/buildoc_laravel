@@ -34,17 +34,12 @@ class Usuario extends Model
         return $this->belongsToMany(GiiInspeccion::class, 'usuarios_gii_inspecciones', 'fk_id_usuario', 'fk_id_inspeccion');
     }
 
-    public function proyectos()
-    {
-        return $this->belongsToMany(GaProyecto::class, 'usuarios_proyectos', 'fk_id_usuario', 'fk_id_proyecto');
-    }
+public function tareasGtUsuarios()
+{
+    return $this->belongsToMany(Tarea::class, 'usuarios_gt_tareas', 'fk_id_usuario', 'fk_id_tarea', 'pk_id_usuario', 'pk_id_tarea');
+}
 
-    
-    public function tareas()
-    {
-        return $this->belongsToMany(Tarea::class, 'usuarios_gt_tareas', 'fk_id_usuario', 'fk_id_tarea', 'pk_id_usuario', 'pk_id_tarea');
-    }
-    // Agrega la relación con la tabla usuarios_proyectos
+
     public function proyectosUsuarios()
     {
         return $this->belongsToMany(GaProyecto::class, 'usuarios_proyectos', 'fk_id_usuario', 'fk_id_proyecto');
@@ -53,4 +48,8 @@ class Usuario extends Model
     {
         return $this->usuNombre . ' ' . $this->usuApellido;
     }
+
+
+
+
 }

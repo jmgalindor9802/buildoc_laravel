@@ -41,7 +41,7 @@
     @foreach ($tareas as $tarea)
     <tr>
     <td scope="row">{{ $tarea->fase->proyecto->proNombre ?? '' }}</td>
-        <td scope="row">{{ $tarea->fase->nombre_fase ?? '' }}</td>
+        <td scope="row">{{ $tarea->fase->fasNombre ?? '' }}</td>
         <td scope="row">{{ $tarea->tarNombre }}</td>
         <td scope="row">{{ \Carbon\Carbon::parse($tarea->tarFecha_limite)->format('j M Y') }}</td>
         <td scope="row">{{ $tarea->responsable->nombre_completo ?? '' }}</td>
@@ -53,7 +53,6 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li><a id="btn-desplegable-detalles" href="{{ route('tarea.edit', $tarea->pk_id_tarea) }}" class="dropdown-item">Actualizar</a></li>
-                    <li><a id="btn-desplegable-seguimiento" href=" " class="dropdown-item">Detalles</a></li>
                     <li><a class="dropdown-item text-danger" href="" data-bs-toggle="modal" data-bs-target="#EliminarUsuario">Archivar
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6a.5.5 0 0 0-.5-.5ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />

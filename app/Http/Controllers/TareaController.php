@@ -21,7 +21,9 @@ class TareaController extends Controller
     public function index()
 {
     // Utilizar Eloquent para cargar las relaciones
-    $tareas = Tarea::with(['fase.proyecto', 'responsables'])->get();
+    $tareas = Tarea::with(['fase.proyecto'])->get();
+
+   
 
     // Formatear fechas usando Carbon
     foreach ($tareas as $tarea) {
@@ -30,6 +32,9 @@ class TareaController extends Controller
     }
 
     return view('gestionTareas.Tareadashboard', compact('tareas'));
+
+
+    
 }
 
     
@@ -74,8 +79,8 @@ class TareaController extends Controller
         
         $tarea-> save();
 
-       return view('gestionTareas.Tareadashboard');
-       return redirect()->route('/tarea')->with('success', 'Tarea creada exitosamente');
+    
+       return redirect()->route('tarea.dashboard')->with('success', 'Tarea creada exitosamente');
     }
 
     /**
@@ -86,7 +91,7 @@ class TareaController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('eliminarTarea');
     }
 
     

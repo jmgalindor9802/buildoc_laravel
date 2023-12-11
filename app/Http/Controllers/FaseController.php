@@ -58,8 +58,7 @@ class FaseController extends Controller
         $fase-> fasDescripcion = $request -> descripcion;
         $fase-> save();
 
-       return view('gestionTareas.Tareadashboard');
-       return redirect()->route('/tarea')->with('success', 'Fase creada exitosamente');
+       return redirect()->route('tarea.dashboard')->with('success', 'Fase creada exitosamente');
 
     }
 

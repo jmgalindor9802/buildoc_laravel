@@ -33,8 +33,10 @@ Route::post('/inspeccion', [IncidenteController::class, 'store'])->name('inspecc
 
 Route::get('/tarea', [TareaController::class, 'index'])->name('tarea.dashboard');
 Route::get('/tarea/creartarea', [TareaController::class, 'create'])->name('crear.tarea');
+Route::get('/tarea/mostrartarea', [TareaController::class, 'show'])->name('tarea.show');
 
 Route::post('/tarea/creartarea/guardar', [TareaController::class, 'store'])->name('tarea.store');
+
 // Ruta para mostrar el formulario de edición
 Route::get('/tarea/{id}/edit', [TareaController::class, 'edit'])->name('tarea.edit');
 

@@ -11,7 +11,7 @@ class GaCliente extends Model
     // Configuracion de la tabla
     protected $table = 'ga_cliente';
     public $timestamps = false;
-    protected $PrimaryKey = 'pk_id_cliente';
+    protected $primaryKey = 'pk_id_cliente';
 
     // Relaciones
     public function proyectos() {
