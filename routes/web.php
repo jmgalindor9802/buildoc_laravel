@@ -8,7 +8,10 @@ use App\Http\Controllers\TareaController;
 use App\Http\Controllers\FaseController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProyectoController;
+use App\Http\Controllers\Admin\UserController;
 
+
+Route::resourse('users',UserController::class)->name('admin,users');
 Route::get('/', function () {
     return view('index');
 });

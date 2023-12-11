@@ -1,21 +1,25 @@
 @extends('layouts.app')
-@section('tituloform', 'Crear tarea')
 @section('content')
-
-<div class="col-10 border-left ">
+<div class="col-12 border-left ">
         <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav ">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
                 <li class="breadcrumb-item"><a href="#">Tareas</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Crear tarea</li>
             </ol>
-        </nav>
-        <h4 class="mb-3 custom-form">Crear tarea</h4>
+        </nav> 
         <div class="col-12 custom-form vh-80">
-            <br>
-
+           
                 <form action="{{ route('tarea.store') }}" class="needs-validation " style="max-height: 70vh;  overflow-y;"  method="post"  >
-                @csrf    
+                @csrf
+                <div class="d-flex justify-content-between align-items-center">
+    <h4 class="mb-3 custom-form">Crear tarea</h4>
+    <div class="d-flex">
+    <a href="{{ route('tarea.dashboard') }}" class="btn btn-primary" style="margin-right: 10px;">Regresar</a>
+            <button class="btn btn-warning" id="guardarTareaButton" style="font-size: 15px;">Guardar tarea</button>
+    </div>
+</div>
+<br>
                 <!-- INSERTAR PROYECTO CON LISTA DESPLEGABLE -->
                     <div class="row g-3 ">
                             <div class="col-sm-6" >
@@ -52,7 +56,7 @@
                         <div class="col-sm">
                             <label for="Nombre_Tarea" class="form-label">Nombre de la
                                 tarea</label>
-                            <input name="tarNombre" type="text" class="form-control" id="Nombre_Tarea" placeholder="Nombre de la tarea"
+                            <input name="tarNombre" maxlength="45" type="text" class="form-control" id="Nombre_Tarea" placeholder="Nombre de la tarea"
                                 required>
                             <div class="invalid-feedback">
                                 Se requiere un nombre válido.
@@ -124,10 +128,7 @@
                             </div>   
                             <br> 
                             <div class="col-md-5">               
-                            <!-- Botón "Guardar tarea" que abre el modal -->
-                        <button class="btn btn-lg float-end custom-btn" id="guardarTareaButton"
-                        style="font-size: 15px;">Guardar tarea</button>
-
+            
                         @include('components.modalConfirmacion')
                                         <!-- Modal de éxito -->
                                         <div class="modal fade" id="successModal" tabindex="-1" role="dialog"

@@ -21,7 +21,7 @@ class TareaController extends Controller
     public function index()
 {
     // Utilizar Eloquent para cargar las relaciones
-    $tareas = Tarea::orderBy('tarFecha_limite','desc')->paginate(5);
+    $tareas = Tarea::orderBy('tarFecha_limite','asc')->paginate(5);
     return view('gestionTareas.Tareadashboard', compact('tareas'));
 }
     public function create()

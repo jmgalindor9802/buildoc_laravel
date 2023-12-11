@@ -11,10 +11,10 @@
         <div style="padding-right:5%">
             <h4 class="mb-3">Tareas </h4>
             <form id="formProyecto" method="post" action="Tareas_dashboard.php">
-                <a href="{{route('crear.tarea')}}"><button class="btn btn-lg float-end custom-btn" type="button"
+                <a href="{{route('crear.tarea')}}"><button class=" btn-lg float-end btn btn-primary" type="button"
                         style="font-size: 15px; margin-right:1%">+ Crear
                         tarea</button></a>
-                <a href="{{route('crear.fase')}}"><button class="btn btn-lg float-end custom-btn" type="button"
+                <a href="{{route('crear.fase')}}"><button class=" btn-lg float-end btn btn-primary" type="button"
                         style="font-size: 15px ;margin-right:1% ">+ Crear fase</button></a>
                 <h1 class="display-6">Tareas próximas</h1>
                 <div class="dropdown">
