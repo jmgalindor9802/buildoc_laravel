@@ -54,6 +54,10 @@
                         <!-- lista de opciones para la seleccion -->
                         <select name="insPeriodicidad" class="form-select" id="periodicidad" required>
                             <option value="">Seleccionar...</option>
+                            <option value="DIARIA">Diaria</option>
+                            <option value="SEMANAL">Semanal</option>
+                            <option value="MENSUAL">Mensual</option>
+                            <option value="NINGUNA">Ninguna</option>
                         </select>
                         <div class="invalid-feedback">
                             Se requiere seleccionar una periodicidad válida.
@@ -112,40 +116,48 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <h4>Asignar usuarios</h4>
-                            <label for="usuario_proyecto_disponible" class="form-label">Seleccione a quienes desea
-                                asignar al
-                                proyecto</label>
+                            <label for="usuario_proyecto_disponible" class="form-label">Seleccione a quienes desea asignar
+                                al proyecto</label>
                             <ul class="list-group" id="usuario_proyecto_disponible">
-
+                                @foreach ($usuarios as $usuario)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="usuarios_proyecto[]"
+                                            value="{{ $usuario->pk_id_usuario }}"
+                                            id="checkbox{{ $usuario->pk_id_usuario }}">
+                                        <label class="form-check-label"
+                                            for="checkbox{{ $usuario->pk_id_usuario }}">{{ $usuario->nombreCompleto() }}</label>
+                                    </div>
+                                @endforeach
                             </ul>
                         </div>
-                        <div class="py-4">
-                            <a class="btn btn-lg float-end custom-btn" style="font-size: 15px;" data-bs-toggle="modal"
-                                data-bs-target="#ProgramarInspeccion">Guardar
-                                Inspeccion</a>
-                        </div>
                     </div>
-                </div>
-                <div class="modal" tabindex="-1" id="ProgramarInspeccion">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Programar Inspeccion</h5>
-                            </div>
-                            <div class="modal-body">
-                                <p>¿Estás seguro de programar esta inspeccion?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Aceptar</button>
-                            </div>
-                        </div>
+                    <div class="py-4">
+                        <a class="btn btn-lg float-end custom-btn" style="font-size: 15px;" data-bs-toggle="modal"
+                            data-bs-target="#ProgramarInspeccion">Guardar
+                            Inspeccion</a>
                     </div>
                 </div>
         </div>
-        </form>
+        <div class="modal" tabindex="-1" id="ProgramarInspeccion">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Programar Inspeccion</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Estás seguro de programar esta inspeccion?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    </form>
+    </div>
+    <script src="{{ asset('js/programarInspeccion.js') }}"></script>
     <script>
         console.log(@json($proyectos));
     </script>

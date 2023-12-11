@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Proyecto;
 use App\Models\GiiInspeccion;
 use Carbon\Carbon;
+use App\Models\Usuario;
 
 class InspeccionController extends Controller
 {
@@ -43,8 +44,9 @@ class InspeccionController extends Controller
      */
     public function create()
     {
+        $usuarios = Usuario::orderByRaw("CONCAT(usuNombre, ' ', usuApellido)")->get();
         $proyectos = Proyecto::orderBy('proNombre')->get();
-        return view('gestionInspeccion&Incidente.programarInspeccion', compact('proyectos'));
+        return view('gestionInspeccion&Incidente.programarInspeccion', compact('usuarios', 'proyectos'));
     }
 
     /**
