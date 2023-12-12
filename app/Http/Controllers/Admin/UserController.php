@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -14,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('gestionSistema\users\index');
+       $usuarios = User::all();
+        return view('gestionSistema\users\index', compact('usuarios'));
     }
 
     /**
@@ -80,6 +82,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $usuario = User::find($id);
+        return $id;
     }
 }
