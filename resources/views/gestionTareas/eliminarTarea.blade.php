@@ -11,7 +11,7 @@
     rel="stylesheet" crossorigin="anonymous">
     
 
-<div class="col-10 border-left">
+<div class="col-12 border-left">
     <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Inicio</a></li>
@@ -80,13 +80,31 @@
                         @include('components.modalConfirmacion')
     
     <!-- ... Bibliotecas jQuery y Bootstrap ... -->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
 crossorigin="anonymous"></script>
 <!-- ... Tu script personalizado ... -->
 <script src="{{ asset('js/fase.js') }}"></script>
 
 
+<script>
+
+// Lógica para abrir el modal de confirmación
+$('#guardarTareaButton').on('click', function (event) {
+  // Evitar la redirección predeterminada
+  event.preventDefault();
+  // Lógica para abrir el modal
+  $('#confirmModal').modal('show');
+});
+
+// Lógica para enviar el formulario cuando se confirma en el modal
+$('#confirmarModalButton').on('click', function () {
+  // Descomentar la siguiente línea si deseas enviar el formulario desde el modal
+  $('form').submit();
+  // Cerrar el modal de confirmación
+  $('#confirmModal').modal('hide');
+});
+</script>
 
 @endsection
 @section('js')

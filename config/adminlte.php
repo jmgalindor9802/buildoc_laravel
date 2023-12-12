@@ -361,7 +361,7 @@ return [
                 ],
                 [
                     'text'    => 'Crear inspección',
-                    'url'     => 'inspeccion/crearinspeccion',
+                    'url'     => 'inspeccion/programarinspeccion',
                 ],
         ],
         ],
