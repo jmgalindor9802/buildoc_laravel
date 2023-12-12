@@ -52,7 +52,8 @@ Route::put('/tarea/{id}', [TareaController::class, 'update'])->name('tarea.updat
 //elininar tarea
 Route::delete('/tarea/destroy/{id}', [TareaController::class, 'destroy'])->name('tarea.destroy');
 
-
+// Consultas
+Route::post('/tarea/consultarTareas', [TareaController::class, 'consutarTarea'])->name('tareas.consultarTareas');
 
 Route::get('/fase/crearfase', [FaseController::class, 'create'])->name('crear.fase');
 Route::post('/fase/guardar', [FaseController::class, 'store'])->name('fase.store');

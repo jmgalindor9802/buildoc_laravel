@@ -22,7 +22,25 @@ class TareaController extends Controller
 {
     // Utilizar Eloquent para cargar las relaciones
     $tareas = Tarea::orderBy('tarFecha_limite','asc')->paginate(5);
-    return view('gestionTareas.Tareadashboard', compact('tareas'));
+    $tareasConsultas =  DB::table('gt_tarea')
+    ->select(
+        'gt_tarea.pk_id_tarea',
+        'gt_tarea.tarNombre',
+        'gt_tarea.tarDescripcion',
+        'gt_tarea.tarPrioridad',
+        'gt_tarea.tarEstado',
+        'gt_tarea.tarFecha_creacion',
+        'gt_tarea.tarFecha_limite',
+        'ga_proyecto.proNombre AS nombre_proyecto',
+        'gt_fase.fasNombre AS nombre_fase',
+        DB::raw('CONCAT(usuario.usuNombre, " ", usuario.usuApellido) AS nombre_completo')
+    )
+    ->join('gt_fase', 'gt_tarea.fk_id_fase', '=', 'gt_fase.pk_id_fase')
+    ->join('ga_proyecto', 'gt_fase.fk_id_proyecto', '=', 'ga_proyecto.pk_id_proyecto')
+    ->join('usuarios_gt_tareas', 'gt_tarea.pk_id_tarea', '=', 'usuarios_gt_tareas.fk_id_tarea')
+    ->join('usuario', 'usuario.pk_id_usuario', '=', 'usuarios_gt_tareas.fk_id_usuario')
+    ->get();
+    return view('gestionTareas.Tareadashboard', compact('tareas', 'tareasConsultas'));
 }
     public function create()
     {
@@ -114,5 +132,17 @@ class TareaController extends Controller
         $tarea = Tarea::find($id);
         $tarea->delete();
         return redirect()->route('tarea.dashboard')->with('success', 'Tarea eliminada exitosamente');
+    }
+    public function consutarTarea(Request $request){
+        $request->validate([
+            'proyectoNombre' => 'required',
+            'FaseNombre' => 'required',
+        ]);
+
+        $proyecto = $request->input('proyectoNombre');
+        $fase = $request->input('FaseNombre');
+
+        $listarTareas = DB::select('CALL ListarTareasPorFaseYProyecto(?,?)', [$fase, $proyecto]);
+        return view('gestionTareas.consultarTareas', compact('listarTareas'));
     }
 }
