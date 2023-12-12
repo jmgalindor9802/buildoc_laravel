@@ -136,7 +136,10 @@ class InspeccionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $inspeccion = GiiInspeccion::findOrFail($id);
+        $proyectos = Proyecto::orderBy('proNombre')->get();
+        $usuarios = Usuario::orderByRaw("CONCAT(usuNombre, ' ', usuApellido)")->get();
+        return view('gestionInspeccion&Incidente.actualizarInspeccionProgramada', compact('inspeccion', 'proyectos', 'usuarios'));
     }
 
     /**
@@ -159,6 +162,8 @@ class InspeccionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $inspeccion = GiiInspeccion::findOrFail($id);
+        $inspeccion->delete();
+        return redirect()->route('inspecciones.dashboard')->with('success', 'Inspeccion eliminado exitosamente.');
     }
 }
