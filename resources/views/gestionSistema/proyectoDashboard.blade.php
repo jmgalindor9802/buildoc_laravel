@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 @section('content')
 
 <div class="col-10 border-left custom-form">

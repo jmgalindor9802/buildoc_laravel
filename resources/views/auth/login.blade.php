@@ -1,4 +1,4 @@
-@extends('layouts.headerlogin')
+@extends('adminlte::auth.login')
 
 @section('content')
 <div class="container">

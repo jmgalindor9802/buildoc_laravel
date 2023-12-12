@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('gestionSistema\users\index');
     }
 
     /**
@@ -35,7 +35,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        return view(admin.users,index);
+       
     }
 
     /**
