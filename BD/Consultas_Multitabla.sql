@@ -132,8 +132,8 @@ BEGIN
             JOIN usuarios_gt_tareas ut ON t.pk_id_tarea = ut.fk_id_tarea
             JOIN usuario u ON u.pk_id_usuario = ut.fk_id_usuario
         WHERE
-            t.tarEstado = 'PENDIENTE'
-            AND t.tarFecha_limite BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 7 DAY)
+         
+            t.tarFecha_limite BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 7 DAY)
         ORDER BY
             p.proNombre, f.fasNombre, t.tarFecha_limite;
     ELSE
@@ -151,8 +151,8 @@ BEGIN
             JOIN gt_fase f ON t.fk_id_fase = f.pk_id_fase
             JOIN ga_proyecto p ON f.fk_id_proyecto = p.pk_id_proyecto
         WHERE
-            t.tarEstado = 'PENDIENTE'
-            AND t.tarFecha_limite BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 7 DAY)
+          
+           t.tarFecha_limite BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 7 DAY)
             AND p.pk_id_proyecto = proyecto
         ORDER BY
             p.proNombre, f.fasNombre, t.tarFecha_limite;
