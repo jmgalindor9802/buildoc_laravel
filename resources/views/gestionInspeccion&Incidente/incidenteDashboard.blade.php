@@ -1,17 +1,28 @@
 @extends('adminlte::page')
 @section('tituloform', 'Incidente')
 @section('content')
-<!-- Fonts -->
-<link rel="dns-prefetch" href="//fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-rel="stylesheet" crossorigin="anonymous">
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
     @if (session('success'))
         <div id="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
+    @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <strong>Error al enviar el formulario</strong>
+                                <br>
+                                <ul>
+                                    @foreach ($errors->all() as $eroor)
+                                        <li>{{ $eroor }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
     <div class="col-12 border-left custom-form">
         <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav">
             <!-- indicador de la ubicacion actual en la pagina -->
@@ -24,6 +35,7 @@ rel="stylesheet" crossorigin="anonymous">
         <div>
             <h4 class="mb-3">Incidentes</h4>
             <div id="Lista de botones">
+                <a class="btn" href="{{ route('incidentes.consultarSeguimientos') }}">Prueba</a>
                 <div class="dropdown float-end">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         style="background-color: transparent; border: none; color: black; fill: black;"
@@ -152,16 +164,15 @@ rel="stylesheet" crossorigin="anonymous">
                     <!-- Formulario para consultar seguimientos -->
                     <form action="{{ route('incidentes.consultarSeguimientos') }}" method="post">
                         @csrf
+                        
                         <!-- Aquí coloca los campos que necesitas para la consulta de seguimientos -->
                         <div class="mb-3">
                             <label for="proyecto_nombre" class="form-label">Nombre del Proyecto</label>
-                            <input type="text" class="form-control" id="proyecto_nombre" name="proyectoNombre"
-                                required>
+                            <input type="text" class="form-control" name="proyectoNombre" required>
                         </div>
                         <div class="mb-3">
                             <label for="incidente_nombre" class="form-label">Nombre del Incidente</label>
-                            <input type="text" class="form-control" id="incidente_nombre" name="incidenteNombre"
-                                required>
+                            <input type="text" class="form-control" name="incidenteNombre" required>
                         </div>
                         <!-- Agrega más campos según sea necesario -->
 
@@ -215,6 +226,8 @@ rel="stylesheet" crossorigin="anonymous">
 @section('js')
     <!-- Agrega tus scripts personalizados aquí -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous">
+    </script>
 @stop

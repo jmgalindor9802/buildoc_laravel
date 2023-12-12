@@ -13,9 +13,10 @@
         <ul>
             @foreach ($seguimientos as $seguimiento)
                 <li>
-                        Descripción: {{ $seguimiento->actDescripcion }}
-                        - Fecha: {{ $seguimiento->actFecha }}
-                        - Fecha: {{ $seguimiento->actSugerencia }}
+                    - Incidente: {{ $seguimiento->Incidente }}
+                    - Descripción: {{ $seguimiento->{"Descripcion del seguimiento"} }}
+                    - Fecha y hora de actualización: {{ $seguimiento->{"Fecha y hora de actualizacion"} }}
+                    - Sugerencia en el seguimiento: {{ $seguimiento->{"Sugerencia en el seguimiento"} }}
                 </li>
             @endforeach
         </ul>

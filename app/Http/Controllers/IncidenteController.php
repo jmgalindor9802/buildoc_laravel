@@ -157,21 +157,19 @@ class IncidenteController extends Controller
     }
     public function consultarSeguimientos(Request $request)
     {
-        // Validar el formulario aquí si es necesario
+        // // Validar el formulario aquí si es necesario
         $request->validate([
-            'proyecto_nombre' => 'required',
-            'incidente_nombre' => 'required',
+            'proyectoNombre' => 'required',
+            'incidenteNombre' => 'required',
         ]);
 
-        // Obtener los parámetros del formulario
-        $proyectoNombre = $request->input('proyecto_nombre');
-        $incidenteNombre = $request->input('incidente_nombre');
+        // // Obtener los parámetros del formulario
+        $proyectoNombre = $request->input('proyectoNombre');
+        $incidenteNombre = $request->input('incidenteNombre');
 
-        // Llamar al procedimiento almacenado
-        $seguimientos = DB::select('CALL ConsultarSeguimientosDeProyecto($proyectoNombre, $incidenteNombre)');
-        dd($seguimientos);
-
+        // // Llamar al procedimiento almacenado y obtener los resultados
+        $seguimientos = DB::select('CALL ConsultarSeguimientosDeProyecto(?, ?)', [$proyectoNombre, $incidenteNombre]);
         // Puedes devolver los resultados a una vista específica o manejarlos según tus necesidades
-        return view('gestionInspeccion&Incidente.consultaSeguimientoResultado', compact('seguimientos'));
+        return view('gestionInspeccion&Incidente.consultaSeguimientoResultado', compact('seguimientos', 'proyectoNombre', 'incidenteNombre'));
     }
 }
