@@ -1,9 +1,6 @@
 @extends('adminlte::page')
 @section('tituloform', 'Incidente')
 @section('content')
-<!-- Scripts -->
-<script src="{{ asset('js/app.js') }}" defer></script>
-
 <!-- Fonts -->
 <link rel="dns-prefetch" href="//fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -15,7 +12,7 @@ rel="stylesheet" crossorigin="anonymous">
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-    <div class="col-10 border-left custom-form">
+    <div class="col-12 border-left custom-form">
         <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav">
             <!-- indicador de la ubicacion actual en la pagina -->
             <ol class="breadcrumb">

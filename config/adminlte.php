@@ -294,7 +294,7 @@ return [
         [
             'type'         => 'navbar-search',
             'text'         => 'Buscar',
-            'topnav_right' => true,
+            'topnav_right' => false,
         ],
         [
             'type'         => 'fullscreen-widget',
@@ -314,6 +314,8 @@ return [
         [
             'text' => 'Dashboard',
             'route'  => 'home',
+            'icon'        => 'far fa-fw fa-home',
+            'label'=>'Nuevo'
             
         ],
         [
@@ -324,62 +326,63 @@ return [
         [
             'text'        => 'Usuarios',
             'url'         => 'usuarios',
-            'icon'        => 'far fa-fw fa-users',
+            'icon'        => 'far fa-fw fa-building',
         ],
         ['header' => 'Modulos'],
         [
             'text' => 'Tareas',
             'url'  => 'tarea',
-            'icon' => 'fas fa-fw fa-list-check',
+            'icon' => 'far fa-fw fa-building',
+            'submenu' => [
+                [
+                    'text' => 'Ver tareas próximas',
+                    'url'  => 'tarea',
+                    'icon'        => 'far fa-fw fa-building',
+                ],
+                [
+                    'text'    => 'Crear tarea',
+                    'url'     => 'tarea/creartarea',
+                ],
+                [
+                    'text' => 'Crear fase',
+                    'url'  => 'fase/crearfase',
+                ],
         ],
+    ],
         [
             'text' => 'Inspecciones',
-            'url'  => 'inspeccion',
-            'icon' => 'fas fa-fw fa-magnifying-glass',
+            'url'  => 'inspecciones',
+            'icon' => 'far fa-fw fa-building',
+            'submenu' => [
+                [
+                    'text' => 'Ver inspecciones',
+                    'url'  => 'inspecciones',
+                    'icon'        => 'far fa-fw fa-building',
+                ],
+                [
+                    'text'    => 'Crear inspección',
+                    'url'     => 'inspeccion/crearinspeccion',
+                ],
+        ],
         ],
         [
             'text' => 'Incidentes',
             'url'  => 'incidentes',
-            'icon' => 'fas fa-fw fa-magnifying-glass',
-        ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-triangle-exclamation',
+            'icon' => 'far fa-fw fa-building',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Ver incidentes',
+                    'url'  => 'incidentes',
+                    'icon'        => 'far fa-fw fa-plus',
                 ],
                 [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
+                    'text'    => 'Reportar incidente',
+                    'url'     => 'incidentes/reportarincidente',
+                    'icon'        => 'far fa-fw fa-plus',
                 ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
         ],
+        ],
+        
         ['header' => 'labels'],
         [
             'text'       => 'important',

@@ -25,14 +25,15 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/incidentes', [IncidenteController::class, 'index'])->name('incidentes.dashboard');
-Route::get('/incidentes/reportar-incidente', [IncidenteController::class, 'create'])->name('reportar.incidente');
-Route::post('/incidentes', [IncidenteController::class, 'store'])->name('incidentes.store');
+Route::get('/incidentes/reportarincidente', [IncidenteController::class, 'create'])->name('reportar.incidente');
+Route::post('/incidentes/guardarincidente', [IncidenteController::class, 'store'])->name('incidentes.store');
 Route::get('/incidentes/editar/{id}', [IncidenteController::class, 'edit'])->name('incidentes.edit');
 Route::put('/incidentes/{id}', [IncidenteController::class, 'update'])->name('incidentes.update');
 Route::delete('/incidentes/{id}', [IncidenteController::class, 'destroy'])->name('incidentes.destroy');
-Route::get('/inspeccion', [InspeccionController::class, 'index'])->name('inspecciones.dashboard');
-Route::get('/inspeccion/programar-inspeccion', [InspeccionController::class, 'create'])->name('programar.inspeccion');
-Route::post('/inspeccion', [IncidenteController::class, 'store'])->name('inspeccion.store');
+
+Route::get('/inspecciones', [InspeccionController::class, 'index'])->name('inspecciones.dashboard');
+Route::get('/inspeccion/crearinspeccion', [InspeccionController::class, 'create'])->name('programar.inspeccion');
+Route::post('/inspeccion/guardarinspeccion', [IncidenteController::class, 'store'])->name('inspeccion.store');
 
 //TAREAS
 Route::get('/tarea', [TareaController::class, 'index'])->name('tarea.dashboard');
@@ -51,7 +52,7 @@ Route::delete('/tarea/destroy/{id}', [TareaController::class, 'destroy'])->name(
 
 
 
-Route::get('/fase', [FaseController::class, 'create'])->name('crear.fase');
+Route::get('/fase/crearfase', [FaseController::class, 'create'])->name('crear.fase');
 Route::post('/fase/guardar', [FaseController::class, 'store'])->name('fase.store');
 
 

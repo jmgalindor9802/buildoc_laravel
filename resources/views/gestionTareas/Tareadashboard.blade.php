@@ -1,13 +1,12 @@
 @extends('adminlte::page')
 @section('content')
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+   
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    rel="stylesheet" crossorigin="anonymous">
+<!-- Fonts -->
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+rel="stylesheet" crossorigin="anonymous">
     
     <div class="col">
         <nav aria-label="breadcrumb" class=" align-items-center  ">
@@ -81,6 +80,7 @@
 @endsection
 
 @section('js')
+@parent
     <!-- Agrega tus scripts personalizados aquí -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
