@@ -213,10 +213,10 @@ BEGIN
     VALUES (nombre, descripcion, estado, fecha, periodicidad, fecha_final, autor, proyecto);
     
     SET idInspeccion = LAST_INSERT_ID();
-    
+    IF inspector IS NOT NULL THEN
     INSERT INTO usuarios_gii_inspecciones (fk_id_usuario, fk_id_inspeccion)
     values (inspector, idInspeccion);
-    
+    END IF;
     COMMIT;
 END//
 
