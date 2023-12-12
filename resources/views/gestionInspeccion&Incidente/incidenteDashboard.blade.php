@@ -13,16 +13,16 @@
         </div>
     @endif
     @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <strong>Error al enviar el formulario</strong>
-                                <br>
-                                <ul>
-                                    @foreach ($errors->all() as $eroor)
-                                        <li>{{ $eroor }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+        <div class="alert alert-danger">
+            <strong>Error al enviar el formulario</strong>
+            <br>
+            <ul>
+                @foreach ($errors->all() as $eroor)
+                    <li>{{ $eroor }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="col-12 border-left custom-form">
         <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav">
             <!-- indicador de la ubicacion actual en la pagina -->
@@ -58,9 +58,6 @@
                                 data-bs-target="#consultaIncidentesModal">
                                 Consultar los incidentes e involucrados relacionados con un proyecto
                             </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">Consultar</a>
                         </li>
                     </ul>
                 </div>
@@ -164,20 +161,44 @@
                     <!-- Formulario para consultar seguimientos -->
                     <form action="{{ route('incidentes.consultarSeguimientos') }}" method="post">
                         @csrf
-                        
-                        <!-- Aquí coloca los campos que necesitas para la consulta de seguimientos -->
                         <div class="mb-3">
                             <label for="proyecto_nombre" class="form-label">Nombre del Proyecto</label>
-                            <input type="text" class="form-control" name="proyectoNombre" required>
+                            <select class="form-select" name="proyectoNombre" id="proyecto_nombre" required>
+                                @foreach ($incidentes as $incidente)
+                                    <option value="{{ $incidente->proNombre }}">{{ $incidente->proNombre }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="incidente_nombre" class="form-label">Nombre del Incidente</label>
-                            <input type="text" class="form-control" name="incidenteNombre" required>
+                            <select class="form-select" name="incidenteNombre" id="incidente_nombre" required>
+                                <!-- Las opciones de incidente se cargarán dinámicamente con JavaScript -->
+                            </select>
                         </div>
-                        <!-- Agrega más campos según sea necesario -->
-
                         <button type="submit" class="btn btn-primary">Consultar</button>
                     </form>
+                    <script>
+                        // Manejar la carga dinámica de incidentes según el proyecto seleccionado
+                        document.getElementById('proyecto_nombre').addEventListener('change', function() {
+                            var proyectoSeleccionado = this.value;
+                            var incidenteSelect = document.getElementById('incidente_nombre');
+
+                            // Limpiar opciones actuales en el select de incidentes
+                            while (incidenteSelect.firstChild) {
+                                incidenteSelect.removeChild(incidenteSelect.firstChild);
+                            }
+
+                            // Filtrar incidentes basados en el proyecto seleccionado y agregar nuevas opciones
+                            @foreach ($incidentes as $incidente)
+                                if ("{{ $incidente->proNombre }}" === proyectoSeleccionado) {
+                                    var option = document.createElement('option');
+                                    option.value = "{{ $incidente->incNombre }}";
+                                    option.text = "{{ $incidente->incNombre }}";
+                                    incidenteSelect.appendChild(option);
+                                }
+                            @endforeach
+                        });
+                    </script>
                 </div>
             </div>
         </div>
@@ -194,11 +215,16 @@
                 </div>
                 <div class="modal-body">
                     <!-- Formulario para consultar incidentes e involucrados -->
-                    <form>
+                    <form action="{{ route('incidentes.consultarIncidenteInvolucrado') }}" method="post">
+                        @csrf
                         <!-- Aquí coloca los campos que necesitas para la consulta -->
                         <div class="mb-3">
                             <label for="proyecto" class="form-label">Proyecto</label>
-                            <input type="text" class="form-control" id="proyecto">
+                            <select class="form-select" name="proyectoNombre" id="proyecto_nombre" required>
+                                @foreach ($incidentes as $incidente)
+                                    <option value="{{ $incidente->proNombre }}">{{ $incidente->proNombre }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <!-- Agrega más campos según sea necesario -->
 
