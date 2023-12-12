@@ -4,38 +4,26 @@
 
 @section('content_header')
     <h1>Gestión de tareas</h1>
-
-
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-body">
             @php
-            $heads = [
-            ['label' => 'Proyecto'],
-            ['label' => 'Fase'],
-            ['label' => 'Tarea'],
-            ['label' => 'Descripción'],
-            ['label' => 'Fecha limite'],
-            ['label' => 'Acciones', 'no-export' => false, 'width' => 20],
-            ];
+                $heads = [
+                    ['label' => 'Proyecto'],
+                    ['label' => 'Fase'],
+                    ['label' => 'Tarea'],
+                    ['label' => 'Descripción'],
+                    ['label' => 'Fecha límite'],
+                    ['label' => 'Acciones', 'no-export' => false, 'width' => 20],
+                ];
 
-            $btnEdit = '<button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
-                                    <i class="fa fa-lg fa-fw fa-pen"></i>
-                                </button>';
-            $btnDelete = '<button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
-                                      <i class="fa fa-lg fa-fw fa-trash"></i>
-                                  </button>';
-            $btnDetails = '<button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details">
-                                       <i class="fa fa-lg fa-fw fa-eye"></i>
-                                   </button>';
-
-            $config = [
-                'language'=>[
-                    'url'=>'//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
-                ]
-            ];
+                $config = [
+                    'language' => [
+                        'url' => '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                    ]
+                ];
             @endphp
 
             {{-- Minimal example / fill data using the component slot --}}
@@ -48,17 +36,20 @@
                         <td>{{$tarea->tarDescripcion}}</td>
                         <td>{{$tarea->tarFecha_limite}}</td>
          
-                        <td>{!! $btnEdit !!}
-                      
-                                {!!$btnDelete!!}
-
-                            {!!$btnDetails!!}</td>
+                        <td>
+                            <a href="{{ route('tarea.edit', $tarea->pk_id_tarea) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="Editar">
+                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                            </a>
+                            <a href="{{ route('tarea.show', $tarea->pk_id_tarea) }}" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Eliminar">
+                                <i class="fa fa-lg fa-fw fa-trash"></i>
+                            </a>
+                            {{-- Puedes agregar más botones de acciones aquí --}}
+                        </td>
                     </tr>
                 @endforeach
             </x-adminlte-datatable>
         </div>
     </div>
-
 @stop
 
 @section('css')
