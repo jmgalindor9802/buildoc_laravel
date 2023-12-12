@@ -53,6 +53,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'pk_id_usuario' => ['required', 'integer'], 
         ]);
     }
 
@@ -64,7 +65,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $pkIdUsuario = $data['pk_id_usuario'] ?? null;
+        unset($data['pk_id_usuario']);
+
         return User::create([
+            'pk_id_usuario' => $pkIdUsuario,
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),

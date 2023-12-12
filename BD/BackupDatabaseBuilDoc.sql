@@ -5,18 +5,21 @@ pk_id_rol BIGINT (20) primary key not null,
 rolNombre varchar (280) not null);
 create table usuario (
 pk_id_usuario BIGINT (20) primary key not null,
-usuNombre varchar (100) not null,
-usuApellido varchar (100) not null,
-usuNombre_eps varchar (100) not null,
-usuNombre_arl varchar (100) not null,
-usuFecha_nacimiento DATE not null,
-usuMunicipio varchar (50) not null,
-usuDireccion_residencia varchar (100) not null,
-usuProfesion varchar (50) not null,
-usuContrasenia varchar (45) not null,
-usuTelefono varchar (12) not null,
-usuCorreo varchar (60) not null);
-
+usuNombre varchar (100) ,
+usuApellido varchar (100) ,
+usuNombre_eps varchar (100) ,
+usuNombre_arl varchar (100) ,
+usuFecha_nacimiento DATE ,
+usuMunicipio varchar (50) ,
+usuDireccion_residencia varchar (100) ,
+usuProfesion varchar (50) ,
+usuContrasenia varchar (45),
+usuTelefono varchar (12) ,
+email varchar (60),
+email_verified_at timestamp,
+password varchar(255),
+remember_token varchar(100),
+name varchar(255));
 create table ga_cliente (
 pk_id_cliente BIGINT (20) primary key not null,
 cliNombre varchar (45) not null,
