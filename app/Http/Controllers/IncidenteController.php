@@ -8,6 +8,7 @@ use App\Models\Proyecto;
 use App\Models\GiiIncidente;
 use App\Models\GiiSeguimiento;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class IncidenteController extends Controller
 {
@@ -153,5 +154,22 @@ class IncidenteController extends Controller
         $incidente = GiiIncidente::findOrFail($id);
         $incidente->delete();
         return redirect()->route('incidentes.dashboard')->with('success', 'Incidente eliminado exitosamente.');
+    }
+    public function consultarSeguimientos(Request $request)
+    {
+        // // Validar el formulario aquí si es necesario
+        $request->validate([
+            'proyectoNombre' => 'required',
+            'incidenteNombre' => 'required',
+        ]);
+
+        // // Obtener los parámetros del formulario
+        $proyectoNombre = $request->input('proyectoNombre');
+        $incidenteNombre = $request->input('incidenteNombre');
+
+        // // Llamar al procedimiento almacenado y obtener los resultados
+        $seguimientos = DB::select('CALL ConsultarSeguimientosDeProyecto(?, ?)', [$proyectoNombre, $incidenteNombre]);
+        // Puedes devolver los resultados a una vista específica o manejarlos según tus necesidades
+        return view('gestionInspeccion&Incidente.consultaSeguimientoResultado', compact('seguimientos', 'proyectoNombre', 'incidenteNombre'));
     }
 }

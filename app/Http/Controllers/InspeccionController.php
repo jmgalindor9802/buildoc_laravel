@@ -8,6 +8,8 @@ use App\Models\Proyecto;
 use App\Models\GiiInspeccion;
 use Carbon\Carbon;
 use App\Models\Usuario;
+use App\Models\UsuariosGiiInspecciones;
+use Illuminate\Support\Facades\DB;
 
 class InspeccionController extends Controller
 {
@@ -56,10 +58,65 @@ class InspeccionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
+    { {
+            $request->validate([
+                'proyecto_inspeccion' => 'required',
+                'nombre_Inspeccion' => 'required',
+                'insPeriodicidad' => 'required',
+                'fourmulario_inspeccion' => 'required',
+                'descripcionInspeccion' => 'required',
+            ]);
 
+            $Proyecto = $request->input('proyecto_inspeccion');
+            $nomInspeccion = $request->input('nombre_Inspeccion');
+            $insperiodicidad = $request->input('insPeriodicidad');
+            $EstadoIns = 'PENDIENTE';
+            $insFormulario = $request->input('fourmulario_inspeccion');
+            $insFechaUnica = $request->input('fecha_unica_inspeccion');
+            $insFechaInicial = $request->input('fechaInicialInspeccion');
+            $insFechaFinal = $request->input('fechaFinalInspeccion');
+            $insDescripcion = $request->input('descripcionInspeccion');
+            $inspector = null;
+            $autor = (int) '1011234567';
+
+            if (strtoupper($insperiodicidad) == 'NINGUNA') {
+                $fechaUsar = $insFechaUnica;
+                $insFechaFinal = $insFechaUnica;
+            } else {
+                $fechaUsar = $insFechaInicial;
+            }
+
+            DB::beginTransaction();
+
+            try {
+                $inspeccion = GiiInspeccion::create([
+                    'insNombre' => $nomInspeccion,
+                    'insDescripcion' => $insDescripcion,
+                    'insEstado' => $EstadoIns,
+                    'insFecha_inicial' => $fechaUsar,
+                    'insPeriodicidad' => $insperiodicidad,
+                    'insFecha_final' => $insFechaFinal,
+                    'fk_id_usuario' => $autor,
+                    'fk_id_proyecto' => $Proyecto,
+                ]);
+                $lastInspeccionId = $inspeccion->pk_id_inspeccion;
+                if ($request->has('usuarios_proyecto') && !empty($request->input('usuarios_proyecto'))) {
+                    $usuariosAsignados = $request->input('usuarios_proyecto');
+                    foreach ($usuariosAsignados as $idUsuario) {
+                        UsuariosGiiInspecciones::create([
+                            'fk_id_usuario' => $idUsuario,
+                            'fk_id_inspeccion' => $lastInspeccionId,
+                        ]);
+                    }
+                }
+                DB::commit();
+                return redirect()->route('inspecciones.dashboard')->with('success', 'Inspección creada exitosamente.');
+            } catch (\Exception $e) {
+                DB::rollback();
+                return back()->withInput()->withErrors(['error' => 'Error al procesar la solicitud.']);
+            }
+        }
+    }
     /**
      * Display the specified resource.
      *
@@ -79,7 +136,10 @@ class InspeccionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $inspeccion = GiiInspeccion::findOrFail($id);
+        $proyectos = Proyecto::orderBy('proNombre')->get();
+        $usuarios = Usuario::orderByRaw("CONCAT(usuNombre, ' ', usuApellido)")->get();
+        return view('gestionInspeccion&Incidente.actualizarInspeccionProgramada', compact('inspeccion', 'proyectos', 'usuarios'));
     }
 
     /**
@@ -102,6 +162,8 @@ class InspeccionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $inspeccion = GiiInspeccion::findOrFail($id);
+        $inspeccion->delete();
+        return redirect()->route('inspecciones.dashboard')->with('success', 'Inspeccion eliminado exitosamente.');
     }
 }

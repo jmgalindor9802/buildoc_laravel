@@ -42,14 +42,10 @@ public function tareasGtUsuarios()
 
     public function proyectosUsuarios()
     {
-        return $this->belongsToMany(GaProyecto::class, 'usuarios_proyectos', 'fk_id_usuario', 'fk_id_proyecto');
+        return $this->belongsToMany(Proyecto::class, 'usuarios_proyectos', 'fk_id_usuario', 'fk_id_proyecto');
     }
     public function nombreCompleto()
     {
         return $this->usuNombre . ' ' . $this->usuApellido;
     }
-
-
-
-
 }

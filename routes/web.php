@@ -30,11 +30,12 @@ Route::post('/incidentes/guardarincidente', [IncidenteController::class, 'store'
 Route::get('/incidentes/editar/{id}', [IncidenteController::class, 'edit'])->name('incidentes.edit');
 Route::put('/incidentes/{id}', [IncidenteController::class, 'update'])->name('incidentes.update');
 Route::delete('/incidentes/{id}', [IncidenteController::class, 'destroy'])->name('incidentes.destroy');
-
-Route::get('/inspecciones', [InspeccionController::class, 'index'])->name('inspecciones.dashboard');
-Route::get('/inspeccion/crearinspeccion', [InspeccionController::class, 'create'])->name('programar.inspeccion');
-Route::post('/inspeccion/guardarinspeccion', [IncidenteController::class, 'store'])->name('inspeccion.store');
-
+Route::post('/incidentes/consultar-seguimientos', [IncidenteController::class, 'consultarSeguimientos'])->name('incidentes.consultarSeguimientos');
+Route::get('/inspeccion', [InspeccionController::class, 'index'])->name('inspecciones.dashboard');
+Route::get('/inspeccion/programar-inspeccion', [InspeccionController::class, 'create'])->name('programar.inspeccion');
+Route::post('/inspeccion', [InspeccionController::class, 'store'])->name('inspeccion.store');
+Route::get('/inspeccion/editar/{id}', [InspeccionController::class, 'edit'])->name('inspecciones.edit');
+Route::delete('/inspeccion/{id}', [InspeccionController::class, 'destroy'])->name('inspeccion.destroy');
 //TAREAS
 Route::get('/tarea', [TareaController::class, 'index'])->name('tarea.dashboard');
 Route::get('/tarea/creartarea', [TareaController::class, 'create'])->name('crear.tarea');
