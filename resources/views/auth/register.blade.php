@@ -10,7 +10,19 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
+                        <div class="row mb-3">
+                            <label for="pk_id_usuario" class="col-md-4 col-form-label text-md-end">{{ __('Usuario ID') }}</label>
 
+                            <div class="col-md-6">
+                                <input id="pk_id_usuario" type="text" class="form-control @error('pk_id_usuario') is-invalid @enderror" name="pk_id_usuario" value="{{ old('pk_id_usuario') }}" required>
+
+                                @error('pk_id_usuario')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
 
