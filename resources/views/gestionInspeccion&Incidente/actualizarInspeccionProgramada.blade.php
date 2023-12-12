@@ -134,15 +134,14 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <h4>Asignar usuarios</h4>
-                            <label for="usuario_proyecto_disponible" class="form-label">Seleccione a quienes desea asignar
-                                al proyecto</label>
+                            <label for="usuario_proyecto_disponible" class="form-label">Seleccione a quienes desea asignar al proyecto</label>
                             <ul class="list-group" id="usuario_proyecto_disponible">
                                 @foreach ($usuarios as $usuario)
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="usuarios_proyecto[]"
                                             value="{{ $usuario->pk_id_usuario }}"
                                             id="checkbox{{ $usuario->pk_id_usuario }}"
-                                            {{ in_array($usuario->pk_id_usuario, optional($inspeccion)->inspectoresAsignados ?? []) ? 'checked' : '' }}>
+                                            {{ in_array($usuario->pk_id_usuario, $inspeccion->inspectoresAsignados->pluck('fk_id_usuario')->toArray()) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="checkbox{{ $usuario->pk_id_usuario }}">
                                             {{ $usuario->nombreCompleto() }}
                                         </label>
@@ -151,6 +150,7 @@
                             </ul>
                         </div>
                     </div>
+                    
                     <div class="py-4">
                         <button type="submit" class="btn btn-lg float-end custom-btn" style="font-size: 15px;">Guardar
                             Inspección</button>

@@ -77,7 +77,7 @@ class InspeccionController extends Controller
             $insFechaFinal = $request->input('fechaFinalInspeccion');
             $insDescripcion = $request->input('descripcionInspeccion');
             $inspector = null;
-            $autor = (int) '1011234567';
+            $autor = (int) 1011234567;
 
             if (strtoupper($insperiodicidad) == 'NINGUNA') {
                 $fechaUsar = $insFechaUnica;
@@ -86,35 +86,21 @@ class InspeccionController extends Controller
                 $fechaUsar = $insFechaInicial;
             }
 
-            DB::beginTransaction();
-
-            try {
-                $inspeccion = GiiInspeccion::create([
-                    'insNombre' => $nomInspeccion,
-                    'insDescripcion' => $insDescripcion,
-                    'insEstado' => $EstadoIns,
-                    'insFecha_inicial' => $fechaUsar,
-                    'insPeriodicidad' => $insperiodicidad,
-                    'insFecha_final' => $insFechaFinal,
-                    'fk_id_usuario' => $autor,
-                    'fk_id_proyecto' => $Proyecto,
-                ]);
-                $lastInspeccionId = $inspeccion->pk_id_inspeccion;
-                if ($request->has('usuarios_proyecto') && !empty($request->input('usuarios_proyecto'))) {
-                    $usuariosAsignados = $request->input('usuarios_proyecto');
-                    foreach ($usuariosAsignados as $idUsuario) {
-                        UsuariosGiiInspecciones::create([
-                            'fk_id_usuario' => $idUsuario,
-                            'fk_id_inspeccion' => $lastInspeccionId,
-                        ]);
-                    }
+            
+            $inspeccion = DB::select('CALL InsertarInspeccion(?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+            [$nomInspeccion, $insDescripcion, $EstadoIns, $fechaUsar, $insperiodicidad, $insFechaFinal, $autor, $Proyecto, $inspector]);
+            $lastInspeccionId = DB::table('gii_inspeccion')->max('pk_id_inspeccion');
+            if ($request->has('usuarios_proyecto') && !empty($request->input('usuarios_proyecto'))) {
+                $usuariosAsignados = $request->input('usuarios_proyecto');
+                foreach ($usuariosAsignados as $idUsuario) {
+                    UsuariosGiiInspecciones::create([
+                        'fk_id_usuario' => $idUsuario,
+                        'fk_id_inspeccion' => $lastInspeccionId,
+                        
+                    ]);
                 }
-                DB::commit();
-                return redirect()->route('inspecciones.dashboard')->with('success', 'Inspección creada exitosamente.');
-            } catch (\Exception $e) {
-                DB::rollback();
-                return back()->withInput()->withErrors(['error' => 'Error al procesar la solicitud.']);
             }
+            return redirect()->route('inspecciones.dashboard')->with('success', 'Inspección creada exitosamente.');
         }
     }
     /**
@@ -151,7 +137,7 @@ class InspeccionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**

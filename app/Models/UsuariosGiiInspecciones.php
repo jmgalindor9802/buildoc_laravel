@@ -11,6 +11,11 @@ class UsuariosGiiInspecciones extends Model
     // Configuracion
     protected $table = 'usuarios_gii_inspecciones';
     public $timestamps = false;
+    protected $fillable = [
+        'fk_id_usuario',
+        'fk_id_inspeccion',
+        // Otros campos si los tienes
+    ];
 
     // Relacion
     public function usuario()
