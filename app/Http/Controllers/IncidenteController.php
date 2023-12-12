@@ -8,6 +8,7 @@ use App\Models\Proyecto;
 use App\Models\GiiIncidente;
 use App\Models\GiiSeguimiento;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class IncidenteController extends Controller
 {
@@ -153,5 +154,38 @@ class IncidenteController extends Controller
         $incidente = GiiIncidente::findOrFail($id);
         $incidente->delete();
         return redirect()->route('incidentes.dashboard')->with('success', 'Incidente eliminado exitosamente.');
+    }
+    public function consultarSeguimientos(Request $request)
+    {
+        // Validar el formulario aquí si es necesario
+        $request->validate([
+            'proyecto_nombre' => 'required',
+            'incidente_nombre' => 'required',
+        ]);
+
+        // Obtener los parámetros del formulario
+        $proyectoNombre = $request->input('proyectoNombre');
+        $incidenteNombre = $request->input('incidenteNombre');
+
+        // Obtener el ID del proyecto
+        $proyectoId = Proyecto::where('proNombre', 'like', '%' . $proyectoNombre . '%')->value('pk_id_proyecto');
+
+        // Obtener el ID del incidente
+        $incidenteId = GiiIncidente::where('incNombre', 'like', '%' . $incidenteNombre . '%')->value('pk_id_incidente');
+
+        // Consultar los seguimientos
+        $seguimientos = GiiSeguimiento::select(
+            'gii_incidente.incNombre as Incidente',
+            'gii_seguimiento.actDescripcion as Descripcion del seguimiento',
+            'gii_seguimiento.actFecha as Fecha y hora de actualizacion',
+            'gii_seguimiento.actSugerencia as Sugerencia en el seguimiento'
+        )
+            ->with('incidente')
+            ->where('gii_seguimiento.fk_id_proyecto', $proyectoId)
+            ->where('gii_seguimiento.fk_id_incidente', $incidenteId)
+            ->get();
+
+        // Devolver la vista con los resultados
+        return view('gestionInspeccion&Incidente.consultaSeguimientoResultado', compact('seguimientos'));
     }
 }

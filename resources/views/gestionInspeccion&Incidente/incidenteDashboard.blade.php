@@ -18,17 +18,46 @@
 
         <div>
             <h4 class="mb-3">Incidentes</h4>
-
-            <a href="{{ route('reportar.incidente') }}">
-                <!-- Boton para agregar nuevos incidentes -->
-                <button class="btn btn-lg float-end custom-btn" type="submit" style="font-size: 15px;"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-plus-lg" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
-                    </svg> Reportar
-                    incidente
-                </button></a>
+            <div id="Lista de botones">
+                <div class="dropdown float-end">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        style="background-color: transparent; border: none; color: black; fill: black;"
+                        aria-expanded="false">
+                        Filtros <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-funnel" viewBox="0 0 16 16">
+                            <path
+                                d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z" />
+                        </svg>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                data-bs-target="#consultaSeguimientosModal">
+                                Consultar seguimientos de un proyecto e incidente
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                data-bs-target="#consultaIncidentesModal">
+                                Consultar los incidentes e involucrados relacionados con un proyecto
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">Consultar</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="{{ route('reportar.incidente') }}">
+                    <!-- Boton para agregar nuevos incidentes -->
+                    <button class="btn btn-lg float-end custom-btn" type="submit" style="font-size: 15px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-plus-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                        </svg> Reportar incidente
+                    </button>
+                </a>
+            </div>
 
             <h1>Ultimos incidentes reportados</h1>
 
@@ -94,13 +123,72 @@
                                             </form>
                                         </li>
                                         <li><a href="{{ route('incidentes.edit', ['id' => $incidente->pk_id_incidente]) }}"
-                                                class="dropdown-item btn-desplegable-Actualizar">Añadir seguimiento</a></li>
+                                                class="dropdown-item btn-desplegable-Actualizar">Añadir seguimiento</a>
+                                        </li>
                                     </ul>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+    <!-- Modal para consultar seguimientos -->
+    <div class="modal fade" id="consultaSeguimientosModal" tabindex="-1" aria-labelledby="consultaSeguimientosModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="consultaSeguimientosModalLabel">Consultar Seguimientos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario para consultar seguimientos -->
+                    <form action="{{ route('incidentes.consultarSeguimientos') }}" method="post">
+                        @csrf
+                        <!-- Aquí coloca los campos que necesitas para la consulta de seguimientos -->
+                        <div class="mb-3">
+                            <label for="proyecto_nombre" class="form-label">Nombre del Proyecto</label>
+                            <input type="text" class="form-control" id="proyecto_nombre" name="proyectoNombre"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="incidente_nombre" class="form-label">Nombre del Incidente</label>
+                            <input type="text" class="form-control" id="incidente_nombre" name="incidenteNombre"
+                                required>
+                        </div>
+                        <!-- Agrega más campos según sea necesario -->
+
+                        <button type="submit" class="btn btn-primary">Consultar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para consultar incidentes e involucrados -->
+    <div class="modal fade" id="consultaIncidentesModal" tabindex="-1" aria-labelledby="consultaIncidentesModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="consultaIncidentesModalLabel">Consultar Incidentes e Involucrados</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario para consultar incidentes e involucrados -->
+                    <form>
+                        <!-- Aquí coloca los campos que necesitas para la consulta -->
+                        <div class="mb-3">
+                            <label for="proyecto" class="form-label">Proyecto</label>
+                            <input type="text" class="form-control" id="proyecto">
+                        </div>
+                        <!-- Agrega más campos según sea necesario -->
+
+                        <button type="submit" class="btn btn-primary">Consultar</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

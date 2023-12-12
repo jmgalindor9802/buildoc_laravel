@@ -27,6 +27,7 @@ Route::post('/incidentes', [IncidenteController::class, 'store'])->name('inciden
 Route::get('/incidentes/editar/{id}', [IncidenteController::class, 'edit'])->name('incidentes.edit');
 Route::put('/incidentes/{id}', [IncidenteController::class, 'update'])->name('incidentes.update');
 Route::delete('/incidentes/{id}', [IncidenteController::class, 'destroy'])->name('incidentes.destroy');
+Route::post('/incidentes/consultar-seguimientos', [IncidenteController::class, 'consultarSeguimientos'])->name('incidentes.consultarSeguimientos');
 Route::get('/inspeccion', [InspeccionController::class, 'index'])->name('inspecciones.dashboard');
 Route::get('/inspeccion/programar-inspeccion', [InspeccionController::class, 'create'])->name('programar.inspeccion');
 Route::post('/inspeccion', [IncidenteController::class, 'store'])->name('inspeccion.store');

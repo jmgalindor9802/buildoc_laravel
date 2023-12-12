@@ -132,27 +132,9 @@
                         </div>
                     </div>
                     <div class="py-4">
-                        <a class="btn btn-lg float-end custom-btn" style="font-size: 15px;" data-bs-toggle="modal"
-                            data-bs-target="#ProgramarInspeccion">Guardar
-                            Inspeccion</a>
+                        <button type="submit" class="btn btn-lg float-end custom-btn" style="font-size: 15px;">Guardar Inspección</button>
                     </div>
                 </div>
-        </div>
-        <div class="modal" tabindex="-1" id="ProgramarInspeccion">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Programar Inspeccion</h5>
-                    </div>
-                    <div class="modal-body">
-                        <p>¿Estás seguro de programar esta inspeccion?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Aceptar</button>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     </form>
