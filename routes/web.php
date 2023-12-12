@@ -62,5 +62,6 @@ Route::get('/clientes', [ClienteController::class, 'index'])->name('cliente.dash
 Route::get('/clientes/crear', [ClienteController::class, 'create'])->name('cliente.crear');
 Route::get('/usuarios', [UserController::class, 'index'])->name('usuario.dashboard');
 Route::get('/usuarios/crear', [UserController::class, 'create'])->name('usuario.crear');
+Route::delete('/usuarios/eliminar/{id}', [UserController::class, 'destroy'])->name('usuario.destroy');
 Route::get('/proyectos', [ProyectoController::class, 'index'])->name('proyecto.dashboard');
 Route::get('/proyectos/crearproyecto', [ProyectoController::class, 'create'])->name('proyecto.crear');

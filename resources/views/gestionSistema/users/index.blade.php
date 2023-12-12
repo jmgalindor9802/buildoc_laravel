@@ -11,18 +11,18 @@
         <div class="card-body">
             @php
             $heads = [
-            'Cédula',
-            'Nombre',
-            'Apellido',
-            'Correo',
-            'Nombre de usuario',
-            ['label' => 'Acciones', 'no-export' => true, 'width' => 20],
+            ['label' => 'Cédula', 'no-export' => false, 'width' => 10],
+            ['label' => 'Nombre', 'no-export' => false, 'width' => 10],
+            ['label' => 'Apellido', 'no-export' => false, 'width' => 10],
+            ['label' => 'Correo', 'no-export' => false, 'width' => 15],
+            ['label' => 'Nombre de usuario', 'no-export' => false, 'width' => 15],
+            ['label' => 'Acciones', 'no-export' => false, 'width' => 20],
             ];
 
             $btnEdit = '<button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                                     <i class="fa fa-lg fa-fw fa-pen"></i>
                                 </button>';
-            $btnDelete = '<button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
+            $btnDelete = '<button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
                                       <i class="fa fa-lg fa-fw fa-trash"></i>
                                   </button>';
             $btnDetails = '<button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details">
@@ -45,7 +45,13 @@
                         <td>{{$usuario->usuApellido}}</td>
                         <td>{{$usuario->email}}</td>
                         <td>{{$usuario->name}}</td>
-                        <td>{!!$btnEdit!!}{!!$btnDelete!!}{!!$btnDetails!!}</td>
+                        <td>{!! $btnEdit !!}
+                            <form style="display: inline"  action="{{route('usuario.destroy',$usuario)}}" method="post" class="formEliminar">
+                                @csrf
+                                @method('delete')
+                                {!!$btnDelete!!}
+                        </form>
+                            {!!$btnDetails!!}</td>
                     </tr>
                 @endforeach
             </x-adminlte-datatable>
