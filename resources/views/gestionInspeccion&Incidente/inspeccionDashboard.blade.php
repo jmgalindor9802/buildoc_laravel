@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         crossorigin="anonymous">
     <div>
-        <div class="col-12 border-left custom-form" style="padding-right: 5%;padding-left: 5%;">
+        <div class="col-12 border-left custom-form" >
             <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav">
                 <!-- indicador de la ubicacion actual en la pagina -->
                 <ol class="breadcrumb">
@@ -19,15 +19,15 @@
 
                 <a href="{{ route('programar.inspeccion') }}">
                     <!-- Boton para agregar nuevos incidentes -->
-                    <button class="btn btn-lg float-end custom-btn" type="submit" style="font-size: 15px;"><svg
+                    <button class="btn btn-lg float-end btn-primary" type="submit" style="font-size: 15px;"><svg
                             xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-plus-lg" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
                                 d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
                         </svg> Agendar inspeccion</button>
                 </a>
-
-                <h1>Ultimas Inspecciones</h1>
+                <h4 class="mb-3">Inspecciones </h4>
+                <h1 class="display-6">Últimas inspecciones</h1>
             </div>
             <div class="table-responsive dataTables_wrapper dt-bootstrap5">
 

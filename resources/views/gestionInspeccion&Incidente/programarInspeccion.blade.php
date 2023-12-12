@@ -17,15 +17,24 @@ rel="stylesheet" crossorigin="anonymous">
                 <li class="breadcrumb-item active" aria-current="page">Programar inspección</li>
             </ol>
         </nav>
-        <h4 class="mb-3 custom-form">Programar inspección</h4>
+       
         <div class="col-12 custom-form vh-80">
             <br>
 
             <form action="{{ route('inspeccion.store') }}" method="POST" class="needs-validation " style="max-height: 70vh"
                 novalidate>
                 @csrf
+                <div class="d-flex justify-content-between align-items-center">
+    <h4 class="mb-3 custom-form">Programar inspección</h4>
+    <div class="d-flex">
+    <a href="{{ route('inspecciones.dashboard') }}" class="btn btn-primary" style="margin-right: 10px;">Regresar</a>
+            <button class="btn btn-warning" id="guardarTareaButton" style="font-size: 15px;">Guardar inspección</button>
+    </div>
+</div>
+<br>
+
                 <div class="row g-3">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="proyecto" class="form-label">Proyecto</label>
                         <select name="proyecto_inspeccion" class="form-select" id="proyecto" required>
                             <option value="">Seleccionar...</option>
@@ -39,7 +48,7 @@ rel="stylesheet" crossorigin="anonymous">
                             Se requiere seleccionar un proyecto válido.
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label id="nombreInspeccion" for="firstName" class="form-label">Nombre de la inspección</label>
                         <input name="nombre_Inspeccion" type="text" class="form-control" id="firstName"
                             placeholder="Nombre de la inspección" value="" required required maxlength="280">
@@ -47,7 +56,16 @@ rel="stylesheet" crossorigin="anonymous">
                             Se requiere un nombre válido.
                         </div>
                     </div>
-                    <div class="col-md-6">
+
+                    <div class="col-md-4">
+                        <label for="Evidencia" class="form-label">Adjuntar formulario de inspección</label>
+                        <input name="fourmulario_inspeccion" class="form-control" type="file" id="Evidencia" multiple
+                            required>
+                        <div class="invalid-feedback">
+                            Se requiere adjuntar una evidencia válida.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <label for="periodicidad" class="form-label">Periodicidad</label>
                         <!-- boton de ayuda -->
                         <button type="button" class="btn btn-sm btn-secondary" id="ayudaGravedad" data-bs-toggle="popover"
@@ -71,15 +89,7 @@ rel="stylesheet" crossorigin="anonymous">
                             Se requiere seleccionar una periodicidad válida.
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="Evidencia" class="form-label">Adjuntar formulario de inspección</label>
-                        <input name="fourmulario_inspeccion" class="form-control" type="file" id="Evidencia" multiple
-                            required>
-                        <div class="invalid-feedback">
-                            Se requiere adjuntar una evidencia válida.
-                        </div>
-                    </div>
-                    <div class="col-md-12" style="display: none;" id="contenedor_FechaInspeccion">
+                    <div class="col-md-6" style="display: none;" id="contenedor_FechaInspeccion">
                         <label for="FechaInspeccion"> Fecha y hora de la inspección</label>
                         <input name="fecha_unica_inspeccion" type="datetime-local" class="form-control" id="FechaInspeccion"
                             required>
@@ -90,7 +100,7 @@ rel="stylesheet" crossorigin="anonymous">
                             La fecha y hora de inspección debe ser posterior a la actual.
                         </div>
                     </div>
-                    <div class="col-md-6" style="display: none;" id="contenedor_fechaInicial">
+                    <div class="col-md-4" style="display: none;" id="contenedor_fechaInicial">
                         <label for="fechaInicial">Fecha y hora de inicio:</label>
                         <input name="fechaInicialInspeccion" type="datetime-local" class="form-control" id="fechaInicial"
                             required>
@@ -101,7 +111,7 @@ rel="stylesheet" crossorigin="anonymous">
                             La fecha y hora de inicio debe ser posterior a la actual.
                         </div>
                     </div>
-                    <div class="col-md-6" style="display: none;" id="contenedor_fechaFinal">
+                    <div class="col-md-4" style="display: none;" id="contenedor_fechaFinal">
                         <label for="fechaFinal">Fecha y hora de finalización:</label>
                         <input name="fechaFinalInspeccion" type="datetime-local" class="form-control" id="fechaFinal"
                             required>
@@ -121,6 +131,7 @@ rel="stylesheet" crossorigin="anonymous">
                             Se requiere una descripción válida.
                         </div>
                     </div>
+                  
                     <div class="row g-3">
                         <div class="col-md-6">
                             <h4>Asignar usuarios</h4>
@@ -139,18 +150,43 @@ rel="stylesheet" crossorigin="anonymous">
                             </ul>
                         </div>
                     </div>
-                    <div class="py-4">
-                        <button type="submit" class="btn btn-lg float-end custom-btn" style="font-size: 15px;">Guardar Inspección</button>
-                    </div>
+                
                 </div>
         </div>
+        @include('components.modalConfirmacion')
     </div>
+
     </form>
     </div>
     <script src="{{ asset('js/programarInspeccion.js') }}"></script>
-    <script>
-        console.log(@json($proyectos));
-    </script>
+   <!-- ... Bibliotecas jQuery y Bootstrap ... -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+crossorigin="anonymous"></script>
+<!-- ... Tu script personalizado ... -->
+<script src="{{ asset('js/fase.js') }}"></script>
+
+
+<script>
+
+// Lógica para abrir el modal de confirmación
+$('#guardarTareaButton').on('click', function (event) {
+  // Evitar la redirección predeterminada
+  event.preventDefault();
+  // Lógica para abrir el modal
+  $('#confirmModal').modal('show');
+});
+
+// Lógica para enviar el formulario cuando se confirma en el modal
+$('#confirmarModalButton').on('click', function () {
+  // Descomentar la siguiente línea si deseas enviar el formulario desde el modal
+  $('form').submit();
+  // Cerrar el modal de confirmación
+  $('#confirmModal').modal('hide');
+});
+</script>
+
+
 @endsection
 @section('js')
     <!-- Agrega tus scripts personalizados aquí -->
