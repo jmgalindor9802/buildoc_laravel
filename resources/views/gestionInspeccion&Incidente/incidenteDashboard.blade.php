@@ -35,7 +35,6 @@
         <div>
             <h4 class="mb-3">Incidentes</h4>
             <div id="Lista de botones">
-                <a class="btn" href="{{ route('incidentes.consultarSeguimientos') }}">Prueba</a>
                 <div class="dropdown float-end">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         style="background-color: transparent; border: none; color: black; fill: black;"
