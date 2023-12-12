@@ -172,4 +172,13 @@ class IncidenteController extends Controller
         // Puedes devolver los resultados a una vista específica o manejarlos según tus necesidades
         return view('gestionInspeccion&Incidente.consultaSeguimientoResultado', compact('seguimientos', 'proyectoNombre', 'incidenteNombre'));
     }
+    public function consultarIncidenteInvolucrados(Request $request){
+        $request->validate([
+            'proyectoNombre' => 'required',
+        ]);
+        $proyectoNombre = $request->input('proyectoNombre');
+
+        $incidenteInvolucrados = DB::select('CALL ConsultarIncidentesYInvolucradosConProyecto(?)', [$proyectoNombre]);
+        return view('gestionInspeccion&Incidente.consultaIncidenteInvolucrado', compact('incidenteInvolucrados'));
+    }
 }

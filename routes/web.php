@@ -31,6 +31,7 @@ Route::get('/incidentes/editar/{id}', [IncidenteController::class, 'edit'])->nam
 Route::put('/incidentes/{id}', [IncidenteController::class, 'update'])->name('incidentes.update');
 Route::delete('/incidentes/{id}', [IncidenteController::class, 'destroy'])->name('incidentes.destroy');
 Route::post('/incidentes/consultar-seguimientos', [IncidenteController::class, 'consultarSeguimientos'])->name('incidentes.consultarSeguimientos');
+Route::post('/incidentes/consultar-incidente-involucrado', [IncidenteController::class, 'consultarIncidenteInvolucrados'])->name('incidentes.consultarIncidenteInvolucrado');
 Route::get('/inspecciones', [InspeccionController::class, 'index'])->name('inspecciones.dashboard');
 Route::get('/inspeccion/programarinspeccion', [InspeccionController::class, 'create'])->name('programar.inspeccion');
 Route::post('/inspeccion', [InspeccionController::class, 'store'])->name('inspeccion.store');
