@@ -30,7 +30,7 @@ CREATE PROCEDURE InsertarUsuario (
 BEGIN
     INSERT INTO Usuario (pk_id_usuario, usuNombre, usuApellido, usuNombre_eps, 
     usuNombre_arl, usuFecha_nacimiento, usuMunicipio, usuDireccion_residencia, usuProfesion, 
-    usuContrasenia, usuTelefono, usuCorreo)
+    usuContrasenia, usuTelefono, email)
     VALUES (Id, Nombre, Apellido, EPS, ARL, Fecha_nacimiento, Municipio, Direccion, Profesion, Contrasenia, Telefono, Correo);
   
 
