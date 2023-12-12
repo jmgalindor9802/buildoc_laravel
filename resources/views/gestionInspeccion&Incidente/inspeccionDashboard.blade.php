@@ -1,8 +1,13 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 @section('tituloform','Inspeccion')
 @section('content')
+<!-- Fonts -->
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+rel="stylesheet" crossorigin="anonymous">
 <div>
-    <div class="col-10 border-left custom-form" style="padding-right: 5%;padding-left: 5%;">
+    <div class="col-12 border-left custom-form" style="padding-right: 5%;padding-left: 5%;">
         <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav">
         <!-- indicador de la ubicacion actual en la pagina -->
         <ol class="breadcrumb">
@@ -81,3 +86,9 @@
     </table>
   </div>
 @endsection
+@section('js')
+    <!-- Agrega tus scripts personalizados aquí -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+@stop
