@@ -9,6 +9,17 @@
 <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 rel="stylesheet" crossorigin="anonymous">
+@if ($errors->any())
+                            <div class="alert alert-danger">
+                                <strong>Error al enviar el formulario</strong>
+                                <br>
+                                <ul>
+                                    @foreach ($errors->all() as $eroor)
+                                        <li>{{ $eroor }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
     <div class="col-12 border-left ">
         <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav ">
             <ol class="breadcrumb">
