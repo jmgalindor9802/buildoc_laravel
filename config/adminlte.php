@@ -340,7 +340,7 @@ return [
         [
             'text' => 'Incidentes',
             'url'  => 'incidentes',
-            'icon' => 'fas fa-fw fa-triangle-exclamation',
+            'icon' => 'fas fa-fw fa-magnifying-glass',
         ],
         [
             'text'    => 'multilevel',
