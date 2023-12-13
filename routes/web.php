@@ -56,8 +56,8 @@ Route::put('/tarea/{id}', [TareaController::class, 'update'])->name('tarea.updat
 Route::delete('/tarea/destroy/{id}', [TareaController::class, 'destroy'])->name('tarea.destroy');
 
 // Consultas
-Route::post('/tarea/consultarTareas', [TareaController::class, 'consutarTarea'])->name('tareas.consultarTareas');
-
+Route::post('/tarea/consultarTareas', [TareaController::class, 'listarTareasPendientesProximos7Dias'])->name('tareas.consultarTareasPendiente');
+Route::post('/tarea/listarTareas-Usuario-Proyecto', [TareaController::class, 'listarTareasPorUsuarioProyecto'])->name('tareas.listaTareasUsuPro');
 Route::get('/fase/crearfase', [FaseController::class, 'create'])->name('crear.fase');
 Route::post('/fase/guardar', [FaseController::class, 'store'])->name('fase.store');
 
@@ -85,3 +85,5 @@ Route::post('/permisos/store', [PermisoController::class, 'store'])->name('permi
 
 Route::get('/proyectos', [ProyectoController::class, 'index'])->name('proyecto.dashboard');
 Route::get('/proyectos/crearproyecto', [ProyectoController::class, 'create'])->name('proyecto.crear');
+Route::post('/proyectos/store', [ProyectoController::class, 'store'])->name('proyecto.store');
+Route::delete('/proyectos/eliminar-proyecto/{id}', [ProyectoController::class, 'destroy'])->name('proyecto.destroy');

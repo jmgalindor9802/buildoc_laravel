@@ -306,21 +306,35 @@ BEGIN
     -- Obtener el ID del proyecto
     SELECT pk_id_proyecto INTO proyecto_id
     FROM ga_proyecto
-    WHERE proNombre LIKE CONCAT('%', proyecto_nombre, '%');
+    WHERE proNombre LIKE CONCAT('%', proyecto_nombre, '%')
+    LIMIT 1;
 
     -- Obtener el ID del incidente
     SELECT pk_id_incidente INTO incidente_id
     FROM gii_incidente
-    WHERE incNombre LIKE CONCAT('%', incidente_nombre, '%');
+    WHERE incNombre LIKE CONCAT('%', incidente_nombre, '%')
+    LIMIT 1;
+
+    -- Manejar errores si no se encuentra el proyecto o el incidente
+    IF proyecto_id IS NULL THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Proyecto no encontrado';
+    END IF;
+
+    IF incidente_id IS NULL THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Incidente no encontrado';
+    END IF;
 
     -- Filtrar los resultados de la consulta
     SELECT i.incNombre AS "Incidente", seg.actDescripcion AS "Descripcion del seguimiento", seg.actFecha AS "Fecha y hora de actualizacion", seg.actSugerencia AS "Sugerencia en el seguimiento"
     FROM gii_seguimiento seg
     INNER JOIN gii_incidente i ON i.pk_id_incidente = seg.fk_id_incidente
     WHERE fk_id_proyecto = proyecto_id AND fk_id_incidente = incidente_id;
-    
+
     COMMIT;
 END//
+
 
 
 DELIMITER ;
