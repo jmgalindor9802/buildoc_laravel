@@ -1,6 +1,6 @@
 <div class="sidebar" style="padding-left:10%">
             <hr>
-            <p class="fs-4 text-center">Servinco SAS</p>
+            <p class="fs-4 text-center">Buildoc</p>
             <hr>
             <!-- Lista de elementos del menú -->
             <ul class="nav nav-pills flex-column mb-auto">
