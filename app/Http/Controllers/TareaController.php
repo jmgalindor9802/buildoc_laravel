@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Proyecto;
 use App\Models\Fase;
 use App\Models\Tarea;
+use App\Models\Usuario;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -25,11 +26,12 @@ class TareaController extends Controller
 }
     public function create()
     {
+        $usuarios = Usuario::all();
         $proyectos = Proyecto::orderBy('proNombre')->get();
         $fases = Fase::orderBy('fasNombre')->get();
 
     // Pasar proyectos y fases a la vista
-    return view('gestionTareas.createTarea', compact('proyectos', 'fases'));
+    return view('gestionTareas.createTarea', compact('proyectos', 'fases', 'usuarios'));
     }
 
    
@@ -56,9 +58,7 @@ class TareaController extends Controller
         $tarea-> fk_id_fase = $request -> tarFase;
         
         $tarea-> save();
-
-    
-       return redirect()->route('tarea.dashboard')->with('success', 'Tarea creada exitosamente');
+        return redirect()->route('tarea.dashboard')->with(['success' => 'Tarea creada exitosamente']);
     }
 
     /**

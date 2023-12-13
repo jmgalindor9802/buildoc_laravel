@@ -71,3 +71,5 @@ Route::delete('/usuarios/eliminar/{id}', [UserController::class, 'destroy'])->na
 
 Route::get('/proyectos', [ProyectoController::class, 'index'])->name('proyecto.dashboard');
 Route::get('/proyectos/crearproyecto', [ProyectoController::class, 'create'])->name('proyecto.crear');
+Route::post('/proyectos/store', [ProyectoController::class, 'store'])->name('proyecto.store');
+Route::delete('/proyectos/eliminar-proyecto/{id}', [ProyectoController::class, 'destroy'])->name('proyecto.destroy');

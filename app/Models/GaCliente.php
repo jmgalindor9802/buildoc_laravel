@@ -15,7 +15,7 @@ class GaCliente extends Model
 
     // Relaciones
     public function proyectos() {
-        return $this->hasMany(GaProyecto::class, 'fk_id_cliente');
+        return $this->hasMany(Proyecto::class, 'fk_id_cliente');
     }
     public function usuarios() {
         return $this->belongsToMany(Usuario::class, 'usuarios_proyectos', 'fk_id_cliente', 'fk_id_usuario');
