@@ -13,18 +13,16 @@
         </div>
     @endif
     <!-- Agrega esto en tu vista para mostrar los resultados -->
-    @if (isset($listarTareas) && is_array($listarTareas))
+    @if (isset($listarTareasUsuarioProyectos) && is_array($listarTareasUsuarioProyectos))
         <h2>Resultados de la Consulta</h2>
         <ul>
-            @foreach ($listarTareas as $listarTarea)
-                <li>
-                    - Proyecto: {{ $listarTarea->Proyecto }}
-                    - Fase: {{ $listarTarea->Fase }}
-                    - Tarea: {{ $listarTarea->Tarea }}
-                    - Fecha Limite: {{ $listarTarea->Fecha_Limite }}
-                    - Responsable: {{ $listarTarea->Responsable }}
-                    - Tiempo Restante: {{ $listarTarea->Tiempo_Restante }}
-                </li>
+            @foreach ($listarTareasUsuarioProyectos as $listarTareasUsuarioProyecto)
+            <li>
+                - Proyecto: {{ $listarTareasUsuarioProyecto->Proyecto }}
+                - Fase: {{ $listarTareasUsuarioProyecto->Fase }}
+                - Tarea: {{ $listarTareasUsuarioProyecto->Tarea }}
+                - Fecha Limite: {{ $listarTareasUsuarioProyecto->Fecha_Limite }}
+            </li>
             @endforeach
         </ul>
     @endif

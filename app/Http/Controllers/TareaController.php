@@ -114,16 +114,26 @@ class TareaController extends Controller
         $tarea->delete();
         return redirect()->route('tarea.dashboard')->with('success', 'Tarea eliminada exitosamente');
     }
-    public function consutarTarea(Request $request){
+    public function listarTareasPendientesProximos7Dias(Request $request){
         $request->validate([
             'proyectoNombre' => 'required',
-            'FaseNombre' => 'required',
         ]);
 
         $proyecto = $request->input('proyectoNombre');
-        $fase = $request->input('FaseNombre');
 
-        $listarTareas = DB::select('CALL ListarTareasPorFaseYProyecto(?,?)', [$fase, $proyecto]);
+        $listarTareas = DB::select('CALL listar_tareas_pendientes_proximos_7_dias_por_proyecto(?)', [$proyecto]);
         return view('gestionTareas.consultarTareas', compact('listarTareas'));
+    }
+    public function listarTareasPorUsuarioProyecto(Request $request){
+        $request->validate([
+            'usuarioId' => 'required',
+            'proyectoNombre' => 'required',
+        ]);
+
+        $usuarioId = $request->input('usuarioId');
+        $proyecto = $request->input('proyectoNombre');
+
+        $listarTareasUsuarioProyectos = DB::select('CALL listar_tareas_por_usuario_por_proyecto(?,?)', [$usuarioId, $proyecto]);
+        return view('gestionTareas.consultarTareasPorUsuarioProyecto', compact('listarTareasUsuarioProyectos', 'proyecto', 'usuarioId'));
     }
 }
