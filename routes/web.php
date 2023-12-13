@@ -9,6 +9,9 @@ use App\Http\Controllers\FaseController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermisoController;
+
 
 
 
@@ -65,9 +68,20 @@ Route::get('/clientes/crear', [ClienteController::class, 'create'])->name('clien
 Route::get('/usuarios', [UserController::class, 'index'])->name('usuario.dashboard');
 Route::get('/usuarios/crear', [UserController::class, 'create'])->name('usuario.crear');
 Route::get('/usuario/{id}/edit', [UserController::class, 'edit'])->name('usuario.edit');
-Route::put('/usuario/{id}/edit', [UserController::class, 'update'])->name('usuario.update');
+Route::put('/usuario/{id}/update', [UserController::class, 'update'])->name('usuario.update');
 Route::delete('/usuarios/eliminar/{id}', [UserController::class, 'destroy'])->name('usuario.destroy');
 
+
+Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+Route::get('/roles/edit/{id}', [RoleController::class, 'edit'])->name('roles.edit');
+Route::delete('/roles/destroy/{id}', [RoleController::class, 'destroy'])->name('roles.destroy');
+Route::post('/roles/store', [RoleController::class, 'store'])->name('roles.store');
+Route::put('/roles/update', [RoleController::class, 'update'])->name('roles.update');
+
+Route::get('/permisos', [PermisoController::class, 'index'])->name('permisos.index');
+Route::get('/permisos/edit/{id}', [PermisoController::class, 'edit'])->name('permisos.edit');
+Route::delete('/permisos/destroy/{id}', [PermisoController::class, 'destroy'])->name('permisos.destroy');
+Route::post('/permisos/store', [PermisoController::class, 'store'])->name('permisos.store');
 
 Route::get('/proyectos', [ProyectoController::class, 'index'])->name('proyecto.dashboard');
 Route::get('/proyectos/crearproyecto', [ProyectoController::class, 'create'])->name('proyecto.crear');

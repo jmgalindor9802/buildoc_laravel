@@ -15,7 +15,7 @@ return [
     */
 
     'title' => '',
-    'title_prefix' => 'Servinco',
+    'title_prefix' => 'BuilDoc',
     'title_postfix' => '',
 
     /*
@@ -304,7 +304,7 @@ return [
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'Buscar',
         ],
         [
             'text' => 'blog',
@@ -319,14 +319,26 @@ return [
             
         ],
         [
+            'text' => 'Roles',
+            'route'  => 'roles.index',
+            'icon'        => 'far fa-fw fa-file',
+        ],
+
+        [
+            'text' => 'Permisos',
+            'route'  => 'permisos.index',
+            'icon'        => 'far fa-fw fa-file', 
+        ],
+   
+        [
             'text'        => 'Proyectos',
             'url'         => 'proyectos',
-            'icon'        => 'far fa-fw fa-building',
+            'icon'        => 'far fa-fw fa-users',
         ],
         [
             'text'        => 'Usuarios',
             'url'         => 'usuarios',
-            'icon'        => 'far fa-fw fa-building',
+            'icon'        => 'far fa-fw fa-user',
         ],
         ['header' => 'Modulos'],
         [
@@ -383,22 +395,7 @@ return [
         ],
         ],
         
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+        
     ],
 
     /*

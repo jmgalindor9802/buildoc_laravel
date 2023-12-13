@@ -90,6 +90,7 @@ class UserController extends Controller
 
                 $usuario->save();
                 return back()->with('message','Actualizado correctamente');
+                
 
 
     }
