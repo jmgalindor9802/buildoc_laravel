@@ -59,7 +59,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuario=User::find($id);
+        return view('gestionSistema\users\editarUser',compact('usuario'));
+     
     }
 
     /**
@@ -71,7 +73,25 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $usuario=User::find($id);
+
+                $usuario->pk_id_usuario =$request->input('Cedula');
+                $usuario->usuNombre =$request->input('NombreUsu');
+                $usuario->usuApellido =$request->input('ApellidoUsu');
+                $usuario->usuNombre_eps =$request->input('EPS');
+                $usuario->usuNombre_arl =$request->input('ARL');
+                $usuario->usuFecha_nacimiento =$request->input('FechaNacimiento');
+                $usuario->usuMunicipio =$request->input('MunicipioUsu');
+                $usuario->usuDireccion_residencia =$request->input('DireccionUsu');
+                $usuario->usuProfesion =$request->input('ProfesionUsu');
+                $usuario->password =$request->input('ContraseniaUsu');
+                $usuario->usuTelefono=$request->input('TelefonoUsu');
+                $usuario->email=$request->input('CorreoUsu');
+
+                $usuario->save();
+                return back()->with('message','Actualizado correctamente');
+
+
     }
 
     /**
@@ -83,6 +103,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $usuario = User::find($id);
-        return $id;
+        $usuario->delete();
+        return back();
     }
 }

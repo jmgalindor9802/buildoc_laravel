@@ -61,8 +61,13 @@ Route::post('/fase/guardar', [FaseController::class, 'store'])->name('fase.store
 
 Route::get('/clientes', [ClienteController::class, 'index'])->name('cliente.dashboard');
 Route::get('/clientes/crear', [ClienteController::class, 'create'])->name('cliente.crear');
+
 Route::get('/usuarios', [UserController::class, 'index'])->name('usuario.dashboard');
 Route::get('/usuarios/crear', [UserController::class, 'create'])->name('usuario.crear');
+Route::get('/usuario/{id}/edit', [UserController::class, 'edit'])->name('usuario.edit');
+Route::put('/usuario/{id}/edit', [UserController::class, 'update'])->name('usuario.update');
 Route::delete('/usuarios/eliminar/{id}', [UserController::class, 'destroy'])->name('usuario.destroy');
+
+
 Route::get('/proyectos', [ProyectoController::class, 'index'])->name('proyecto.dashboard');
 Route::get('/proyectos/crearproyecto', [ProyectoController::class, 'create'])->name('proyecto.crear');
